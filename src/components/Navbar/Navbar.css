@@ -1,0 +1,10 @@
+.settings-container {
+  display: flex;
+  width: 70%;
+  justify-self: center;
+  margin: 20px;
+}
+.settings-container .choise-container {
+  display: flex;
+  gap: 10px;
+}/*# sourceMappingURL=Navbar.css.map */

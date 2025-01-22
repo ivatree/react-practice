@@ -1,0 +1,32 @@
+.regBtn{
+    height: 3rem;
+    border: 3px solid #FE5F1E;
+    color: #ffffff;
+    background-color: #FE5F1E;
+    border-radius: 30px;
+    text-align: center;
+    padding: 10px;
+    letter-spacing: 0.1rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover{
+        background-color: #FE7F1E;
+    }
+}
+
+.choise{
+    height: 2.5rem;
+    list-style: none;
+    cursor: pointer;
+    background-color: #00000005;
+    padding: 10px;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    color: #000000;
+    transition: all 0.2s;
+    &:hover{
+        background-color: #282828;
+        color: #ffffff;
+    }
+}
