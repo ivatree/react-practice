@@ -1,4 +1,11 @@
 .App {
   text-align: center;
-  width: 70%;
+}
+.card-container{
+  width: 1300px;
+  height: max-content;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 2rem;
 }

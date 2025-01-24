@@ -1,10 +1,18 @@
 .settings-container {
   display: flex;
-  width: 70%;
+  width: 1300px;
   justify-self: center;
-  margin: 20px;
+  align-items: center;
+  text-align: center;
+  margin-block: 1rem;
+  justify-content: space-between;
 }
 .settings-container .choise-container {
   display: flex;
-  gap: 10px;
+  gap: 0.75rem;
+}
+.settings-container .selected-option {
+  color: #FE7F1E;
+  text-decoration: underline;
+  text-decoration-style: dotted;
 }/*# sourceMappingURL=Navbar.css.map */

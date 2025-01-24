@@ -6,7 +6,7 @@ header {
   justify-content: center;
 }
 header .headerContainer {
-  width: 70%;
+  width: 1300px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -29,7 +29,7 @@ header .headerContainer .containerForLogo .logo {
 }
 header .headerContainer .containerForLogo .title {
   grid-column: 2;
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.1rem;
   align-self: center;
@@ -40,4 +40,10 @@ header .headerContainer .containerForLogo .description {
   text-wrap: nowrap;
   align-self: center;
   color: rgba(0, 0, 0, 0.5647058824);
+}
+header .headerContainer .containerForBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }/*# sourceMappingURL=Header.css.map */

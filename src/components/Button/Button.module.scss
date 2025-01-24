@@ -1,32 +1,102 @@
+@import url("https://db.onlinewebfonts.com/c/9b424ab5e96ee96f675c922ff9c6aff3?family=Dodo+Rounded");
+*{
+  font-family: "Dodo Rounded";
+}
 .regBtn{
-    height: 3rem;
-    border: 3px solid #FE5F1E;
+    cursor: pointer;
     color: #ffffff;
     background-color: #FE5F1E;
-    border-radius: 30px;
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem;
+    padding-inline: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
     text-align: center;
-    padding: 10px;
-    letter-spacing: 0.1rem;
-    transition: all 0.3s;
-    cursor: pointer;
+    transition: all 0.2s;
     &:hover{
         background-color: #FE7F1E;
     }
 }
 
 .choise{
-    height: 2.5rem;
-    list-style: none;
     cursor: pointer;
-    background-color: #00000005;
-    padding: 10px;
-    font-weight: 600;
-    border: none;
-    border-radius: 30px;
     color: #000000;
+    background-color: #00000005;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.75rem;
+    padding-inline: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
     transition: all 0.2s;
     &:hover{
-        background-color: #282828;
         color: #ffffff;
+        background-color: #282828;
+    }
+}
+
+.addPizza{
+    cursor: pointer;
+    color: #FE7F1E;
+    background-color: #FFF0E6;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s;
+    &:hover{
+        background-color: #FFD2B3;
+    }
+}
+
+.openSort{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    float: left;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.closeModal{
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #ff00008e;
+    border: none;
+    display: flex;
+    border-radius: 5rem;
+    padding: 0.25rem;
+    font-size: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    float: right;
+    &:hover{
+        transition: all 0.2s;
+        color: #ffffff;
+        background-color: #ff0000c0;
+    }
+}
+
+.accepting{
+    cursor: pointer;
+    color: #FE7F1E;
+    background-color: #FFF0E6;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s;
+    &:hover{
+        background-color: #FFD2B3;
     }
 }

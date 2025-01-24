@@ -1,0 +1,23 @@
+.menu-list {
+  z-index: 1;
+  background-color: #ffffff;
+  top: 9rem;
+  right: 18rem;
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.062745098);
+  border-radius: 15px;
+  padding-block: 11px;
+  padding-inline: 11px;
+}
+.menu-list .menu-item {
+  list-style: none;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.menu-list .menu-item:hover {
+  transition: all 0.2s;
+  color: #FE7F1E;
+}/*# sourceMappingURL=Menu.css.map */

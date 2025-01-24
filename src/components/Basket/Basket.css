@@ -1,0 +1,27 @@
+.basket-container {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 10% 80% 10%;
+}
+.basket-container .basket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.basket-container .basket-header .basket-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.basket-container .basket-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  margin-left: 1.5rem;
+}
+.basket-container .basket-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2rem;
+}/*# sourceMappingURL=Basket.css.map */

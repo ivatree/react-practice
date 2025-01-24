@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+      "typeRoots": ["./node_modules/@types", "./types"],
+      "types": ["react", "react-dom", "react-redux", "node"],
       "target": "esnext",
       "module": "esnext",
       "moduleResolution": "node",
@@ -8,7 +10,8 @@
       "strict": false,
       "esModuleInterop": true,
       "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
+      "forceConsistentCasingInFileNames": true,
+      "baseUrl": "src"
     },
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
   }
