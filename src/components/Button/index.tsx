@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './Button.module.css'
+import './Button.module.scss'
 
 interface ButtonProps {
     className: string;
@@ -8,13 +7,6 @@ interface ButtonProps {
     text: any;
     children?: React.ReactNode;
   }
-
-Button.propTypes = {
-    onClick: PropTypes.func.isRequired,
-    text: PropTypes.string.isRequired,
-    className: PropTypes.object.isRequired,
-    children: PropTypes.node,
-};
 
 export default function Button({className, onClick, text, children }: ButtonProps) {
     return (

@@ -1,8 +1,9 @@
 .App {
   text-align: center;
 }
+
 .card-container{
-  width: 1300px;
+  width: 100%;
   height: max-content;
   justify-self: center;
   display: grid;

@@ -1,14 +1,10 @@
-@import url("https://db.onlinewebfonts.com/c/9b424ab5e96ee96f675c922ff9c6aff3?family=Dodo+Rounded");
-*{
-  font-family: "Dodo Rounded";
-}
 .regBtn{
     cursor: pointer;
     color: #ffffff;
     background-color: #FE5F1E;
     border: none;
     border-radius: 2rem;
-    padding: 1rem;
+    padding: 0.75rem;
     padding-inline: 1.5rem;
     font-size: 1rem;
     font-weight: 600;
@@ -22,7 +18,7 @@
 .choise{
     cursor: pointer;
     color: #000000;
-    background-color: #00000005;
+    background-color: #FAFAFA;
     border: none;
     border-radius: 2rem;
     padding: 0.75rem;
@@ -64,8 +60,8 @@
 }
 
 .closeModal{
-    width: 2rem;
-    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
     cursor: pointer;
     color: #ffffff;
     background-color: #ff00008e;
@@ -98,5 +94,19 @@
     transition: all 0.3s;
     &:hover{
         background-color: #FFD2B3;
+    }
+}
+
+.switchBtn{
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 1px solid black;
+    &:hover{
+        transition: all 0.2s;
+        color: #FE7F1E;
     }
 }
