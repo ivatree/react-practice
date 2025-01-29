@@ -1,51 +1,53 @@
+@import '../../Styles/styles.modeule.scss';
+
 .regBtn{
     cursor: pointer;
-    color: #ffffff;
+    color: $white;
     background-color: #FE5F1E;
     border: none;
-    border-radius: 2rem;
-    padding: 0.75rem;
-    padding-inline: 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: $radius;
+    padding: $paddingmd;
+    padding-inline: $inline-padding;
+    font-size: $fontsm;
+    font-weight: $fontbold;
     text-align: center;
     transition: all 0.2s;
     &:hover{
-        background-color: #FE7F1E;
+        background-color: $mainorange;
     }
 }
 
 .choise{
     cursor: pointer;
-    color: #000000;
-    background-color: #FAFAFA;
+    color: $black;
+    background-color: $lightgray;
     border: none;
-    border-radius: 2rem;
-    padding: 0.75rem;
-    padding-inline: 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: $radius;
+    padding: $paddingmd;
+    padding-inline: $inline-padding;
+    font-size: $fontsm;
+    font-weight: $fontbold;
     text-align: center;
     transition: all 0.2s;
     &:hover{
-        color: #ffffff;
-        background-color: #282828;
+        color: $white;
+        background-color: $gray;
     }
 }
 
 .addPizza{
     cursor: pointer;
-    color: #FE7F1E;
+    color: $mainorange;
     background-color: #FFF0E6;
     border: none;
-    border-radius: 2rem;
-    padding: 0.75rem;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: $radius;
+    padding: $paddingmd;
+    font-size: $fontsm;
+    font-weight: $fontbold;
     text-align: center;
     transition: all 0.3s;
     &:hover{
-        background-color: #FFD2B3;
+        background-color: $lightorange;
     }
 }
 
@@ -54,8 +56,8 @@
     background-color: transparent;
     border: none;
     float: left;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: $fontsm;
+    font-weight: $fontbold;
     text-align: left;
 }
 
@@ -63,34 +65,55 @@
     min-width: 2rem;
     min-height: 2rem;
     cursor: pointer;
-    color: #ffffff;
+    color: $white;
     background-color: #ff00008e;
     border: none;
     display: flex;
-    border-radius: 5rem;
-    padding: 0.25rem;
-    font-size: 1.25rem;
+    border-radius: $radius;
+    padding: $paddingsm;
+    font-size: $fontmd;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
     float: right;
     &:hover{
         transition: all 0.2s;
-        color: #ffffff;
+        color: $white;
         background-color: #ff0000c0;
     }
 }
 
 .switchBtn{
     border: none;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: $fontsm;
+    font-weight: $fontbold;
     background-color: transparent;
     cursor: pointer;
     transition: all 0.2s;
     border-bottom: 1px solid black;
     &:hover{
         transition: all 0.2s;
-        color: #FE7F1E;
+        color: $mainorange;
+    }
+}
+
+.deleteItem{
+    min-width: 2rem;
+    min-height: 2rem;
+    cursor: pointer;
+    color: $gray;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    border-radius: $radius;
+    padding: $paddingsm;
+    font-size: $fontmd;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    float: right;
+    &:hover{
+        transition: all 0.2s;
+        transform: scale(1.2);
     }
 }

@@ -1,3 +1,5 @@
+@import '../../Styles/styles.modeule.scss';
+
 .basket-container{
     display: grid;
     min-height: 25rem;
@@ -8,8 +10,8 @@
         justify-content: space-between;
         align-items: center;
         .basket-title{
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: $fontlg;
+            font-weight: $fontbold;
         }
     }
     .basket-body{
@@ -27,12 +29,12 @@
         }
         .basket-item{
             display: grid;
-            grid-template-columns: 30% 70%;
+            grid-template-columns: 30% 60% 10%;
             grid-template-rows: 2rem 5rem 2rem;
             justify-content: center;
             align-items: center;
             box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
-            padding: 1rem;
+            padding: $paddinglg;
             border-radius: 1rem;
             margin-bottom: 1rem;
             .item-image{
@@ -48,16 +50,22 @@
             .item-description{
                 grid-column: 2;
                 width: 20rem;
-                font-size: 14px;
+                font-size: $fontsm;
             }
             .item-price{
                 grid-column: 2;
+            }
+            .item-delete{
+                justify-self: center;
+                align-self: center;
+                grid-column: 3;
+                grid-row: 1;
             }
         }
     }
     .btn-container{
         margin-left: 1rem;
-        width: 100%;
+        width: $width;
         display: flex;
         align-items: center;
         justify-content: space-between;

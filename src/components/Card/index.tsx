@@ -6,7 +6,7 @@ import { Modal } from '../Modal';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, getDocs, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import CardChoise from './CardChoise';
+import CardChoice from './CardChoise';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -66,12 +66,11 @@ export default function Card() {
     image: string,
     title: string,
     description: string,
-    price: number,
-    id: string
+    price: number
   ) => {
-    setSelectComponent({ image, title, description, price, id });
+    setSelectComponent({ image, title, description, price });
     setModalActive(true);
-    navigate(`/product/${id}`);
+    navigate(`/product`);
   };
 
   return (
@@ -81,13 +80,7 @@ export default function Card() {
           key={card.id}
           className="pizza-card"
           onClick={() =>
-            openModal(
-              card.image,
-              card.title,
-              card.description,
-              card.price,
-              card.id
-            )
+            openModal(card.image, card.title, card.description, card.price)
           }
         >
           <img className="pizza-prewie" src={card.image} alt={card.title} />
@@ -98,13 +91,7 @@ export default function Card() {
             <Button
               className={styles.addPizza}
               onClick={() =>
-                openModal(
-                  card.image,
-                  card.title,
-                  card.description,
-                  card.price,
-                  card.id
-                )
+                openModal(card.image, card.title, card.description, card.price)
               }
               text={'Выбрать'}
             />
@@ -112,13 +99,7 @@ export default function Card() {
         </div>
       ))}
       <Modal active={modalActive} closeModal={closeModal}>
-        <CardChoise
-          image={selectComponent.image}
-          title={selectComponent.title}
-          description={selectComponent.description}
-          price={selectComponent.price}
-          id={selectComponent.id}
-        />
+        <CardChoice content={selectComponent} />
       </Modal>
     </>
   );

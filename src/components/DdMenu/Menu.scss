@@ -1,13 +1,15 @@
+@import '../../Styles/styles.modeule.scss';
+
 .menu-list{
     z-index: 1;
-    background-color: #ffffff;
+    background-color: $white;
     top: 9rem;
     right: 18rem;
     position: absolute;
-    border: 1px solid #00000010;
+    border: $lBorder;
     border-radius:15px;
-    padding-block: 11px;
-    padding-inline: 11px;
+    padding-block: $paddingmd;
+    padding-inline: $paddingmd;
     .menu-item{
         list-style: none;
         height: 2.25rem;
@@ -17,7 +19,7 @@
         transition: all 0.2s;
         &:hover{
             transition: all 0.2s;
-            color: #FE7F1E;
+            color: $mainorange;
         }
     }
 }

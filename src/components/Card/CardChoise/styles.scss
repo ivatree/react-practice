@@ -1,18 +1,21 @@
+@import '../../../Styles/styles.modeule.scss';
+
 .prewiew-container{
     display: grid;
-    min-height: 20rem;
+    min-height: $widthmd;
     margin-top: 2.25rem;
     .prewiew-body{
         display: grid;
         justify-self: center;
         align-self: center;
-        grid-template-rows: 20% 40% 40%;
+        grid-template-rows: 15% 45% 40%;
+        grid-row-gap: 0.25rem;
         .card-image{
             align-self: flex-end;
             justify-self: center;
             grid-column: 1;
             grid-row: 1 / 4;
-            max-width: 20rem;
+            max-width: $widthmd;
         }
         .card-title{
             display: flex;
@@ -27,14 +30,14 @@
             flex-wrap: wrap;
             grid-column: 2;
             grid-row: 2;
-            max-width: 15rem;
+            max-width: $widthsm;
         }
         .card-price{
             justify-self: center;
             grid-column: 2;
             grid-row: 3;
-            font-weight: 600;
-            font-size: 1.25rem;
+            font-weight: $fontbold;
+            font-size: $fontmd;
         }
         .card-settings{
             display: grid;
@@ -44,26 +47,26 @@
                 position: relative;
                 display: flex;
                 align-items: center;
-                border-radius: 10rem;
-                background-color: #fff;
-                color: #000;
+                border-radius: $radius;
+                background-color: $white;
+                color: $black;
                 width: var(--container_width);
                 overflow: hidden;
-                border: 1px solid #282828;
+                border: $gBorder;
                 input {
                   display: none;
                 }
                 label {
-                  width: 100%;
+                  width: $width;
                   cursor: pointer;
                   display: flex;
                   justify-content: center;
                   align-items: center;
                   z-index: 1;
-                  font-weight: 600;
-                  font-size: 14px;
+                  font-weight: $fontbold;
+                  font-size: $fontsm;
                   &:has(input:checked) {
-                    color: #fff;
+                    color: $white;
                   }
               
                   &:has(input:checked) ~ .selection {
@@ -86,7 +89,7 @@
                 .selection {
                     display: none;
                     position: absolute;
-                    height: 100%;
+                    height: $height;
                     width: calc(var(--container_width) / 3);
                     z-index: 0;
                     left: 0;
@@ -100,29 +103,29 @@
                 position: relative;
                 display: flex;
                 align-items: center;
-                border-radius: 10rem;
-                background-color: #fff;
-                color: #000;
+                border-radius: $radius;
+                background-color: $white;
+                color: $black;
                 width: var(--container_width);
                 overflow: hidden;
-                border: 1px solid #282828;
+                border: $gBorder;
                 .type-input {
                   display: none;
                 }
                 .type-label {
-                    width: 100%;
+                    width: $width;
                     cursor: pointer;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     z-index: 1;
-                    font-weight: 600;
-                    font-size: 14px;
+                    font-weight: $fontbold;
+                    font-size: $fontsm;
                     &:has(.type-input:checked) {
-                      color: #fff;
+                      color: $white;
                     }
                   &:has(.type-input:checked) ~ .type-selection {
-                    background-color: #282828;
+                    background-color: $gray;
                     display: inline-block;
                   }
               
@@ -137,7 +140,7 @@
                 .type-selection {
                     display: none;
                     position: absolute;
-                    height: 100%;
+                    height: $height;
                     width: 7.5rem;
                     z-index: 0;
                     left: 0;

@@ -1,36 +1,44 @@
 import Button from 'components/Button';
 import styles from 'components/Button/Button.module.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
+import { getBasket, saveBasket } from '../../../utils/firebase';
 
 interface BasketProps {
-  image: string;
-  title: string;
-  description: string;
-  price: number;
+  content: {
+    image: string;
+    title: string;
+    description: string;
+    price: number;
+  };
 }
 
-export default function CardChoise({
-  image,
-  title,
-  description,
-  price,
-}: BasketProps) {
-  const addToBasket = () => {
-    const selectedCard = { image, title, description, price, id };
-    const existingCards = JSON.parse(
-      localStorage.getItem('selected-cards') || '[]'
-    );
-    existingCards.push(selectedCard);
-    localStorage.setItem('selected-cards', JSON.stringify(existingCards));
+export default function CardChoice({ content }: BasketProps) {
+  const [basketItem, setBasketItem] = useState([]);
+
+  useEffect(() => {
+    const fetchBasket = async () => {
+      const fetchItems = await getBasket();
+      setBasketItem(fetchItems || []);
+    };
+    fetchBasket();
+  }, []);
+
+  const addToBasket = async () => {
+    if (content) {
+      const newItem = [...basketItem, content];
+      setBasketItem(newItem);
+      console.log('Данные корзины сохранены', newItem);
+      await saveBasket(newItem);
+    }
   };
 
   return (
     <div className="prewiew-container">
       <div className="prewiew-body">
-        <img className="card-image" src={image} alt={title} />
-        <h3 className="card-title">{title}</h3>
-        <span className="card-description">{description}</span>
+        <img className="card-image" src={content.image} alt={content?.title} />
+        <h3 className="card-title">{content.title}</h3>
+        <span className="card-description">{content.description}</span>
         <div className="card-settings">
           <div className="size-input">
             <label>
@@ -74,7 +82,7 @@ export default function CardChoise({
         <Button
           className={styles.addPizza}
           onClick={addToBasket}
-          text={`В корзину ${price} руб.`}
+          text={`В корзину ${content.price} руб.`}
         />
       </div>
     </div>
