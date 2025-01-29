@@ -1,14 +1,16 @@
+@import '../../Styles/styles.modeule.scss';
+
 .form-container{
     display: grid;
     grid-template-rows: auto auto auto auto 35%;
-    width: 100%;
-    margin-left: 0.75rem;
+    width: $width;
+    margin-left: $paddingmd;
     .input-outline{
         background-color: #00000005;
         display: flex;
-        border-radius: 10rem;
+        border-radius: $radius;
         height: 3rem;
-        width: 100%;
+        width: $width;
         align-items: center;
         justify-content: center;
         transition: all 0.2s;

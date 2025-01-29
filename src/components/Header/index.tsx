@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Header.scss';
-import pizzaLogo from './pizzaLogo.png';
+import pizzalogo from './pizzalogo.png';
 import Button from '../Button';
 import styles from '../Button/Button.module.scss';
 import { Modal } from '../Modal';
@@ -60,7 +60,7 @@ export default function Header() {
       <header>
         <div className="headerContainer">
           <div className="containerForLogo">
-            <img className="logo" src={pizzaLogo} alt="Logo" />
+            <img className="logo" src={pizzalogo} alt="Logo" />
             <span className="title">REACT PIZZA</span>
             <span className="description">
               самая вкусная пицца во вселенной
@@ -78,7 +78,7 @@ export default function Header() {
                   selectComponent.id
                 )
               }
-              text={'КОРЗИНА'}
+              text={'Корзина'}
             />
             {isUser ? (
               <Button
@@ -90,7 +90,7 @@ export default function Header() {
               <Button
                 className={styles.regBtn}
                 onClick={openRegForm}
-                text={'РЕГИСТРАЦИЯ'}
+                text={'Регистрация'}
               />
             )}
           </div>
@@ -103,10 +103,9 @@ export default function Header() {
               path="/Basket"
               element={
                 <Basket
-                  image={selectComponent.image}
-                  title={selectComponent.title}
-                  description={selectComponent.description}
-                  price={selectComponent.price}
+                  isOpen={true}
+                  closebasket={closeModal}
+                  initialItems={[]}
                 />
               }
             />

@@ -1,6 +1,8 @@
+@import '../../Styles/styles.modeule.scss';
+
 .settings-container{
     display: flex;
-    width: 100%;
+    width: $width;
     justify-self: center;
     align-items: center;
     text-align: center;
@@ -11,7 +13,7 @@
         gap: 0.75rem;
     }
     .selected-option{
-        color: #FE7F1E;
+        color: $mainorange;
         text-decoration: underline;
         text-decoration-style: dotted;
     }

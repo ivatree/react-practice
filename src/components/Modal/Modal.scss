@@ -1,3 +1,5 @@
+@import '../../Styles/styles.modeule.scss';
+
 .modal{
     min-width: 100vw;
     min-height: 100vh;
@@ -13,7 +15,7 @@
     .modal-content{
         padding: 2.25rem;
         border-radius: 2rem;
-        background-color: #ffffff;
+        background-color: $white;
         min-width: 25rem;
         min-height: 25rem;
         transform: scale(0);

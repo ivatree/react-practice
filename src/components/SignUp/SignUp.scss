@@ -1,11 +1,13 @@
+@import '../../Styles/styles.modeule.scss';
+
 .signUp-container{
     display: grid;
     align-items: center;
     .signUp-header{
         margin: 0.25rem;
         align-items: center;
-        font-weight: 600;
-        font-size: 1.5rem;
+        font-weight: $fontbold;
+        font-size: $fontlg;
         height: 2rem;
         margin-bottom: 2rem;
     }
