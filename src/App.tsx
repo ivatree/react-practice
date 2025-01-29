@@ -1,28 +1,36 @@
-import React from 'react';
-import './App.css'
-import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
-import Card from './components/Cards/Card';
-import Footer from './components/Footer/Footer';
+import React, { useEffect } from 'react';
+import './App.css';
+import Navbar from './components/Navbar';
+import Layout from './components/Layout/Layout';
+import { BrowserRouter } from 'react-router-dom';
+import Card from 'components/Card';
+import { useDispatch } from 'react-redux';
+import { setUser } from 'store/slices/userSlice';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      dispatch(setUser(JSON.parse(userData)));
+    }
+  }, [dispatch]);
+
   return (
-<>
-      <Header></Header>
-      <Navbar></Navbar>
-      <div className="card-container">
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-      </div>
-      <Footer></Footer>
+    <>
+      <BrowserRouter>
+        <Layout>
+          <div className="main-container">
+            <Navbar></Navbar>
+            <div className="card-container">
+              <Card />
+            </div>
+          </div>
+        </Layout>
+      </BrowserRouter>
     </>
   );
 }
 
-export default App
+export default App;

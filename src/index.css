@@ -1,9 +1,17 @@
-@import url("https://db.onlinewebfonts.com/c/9b424ab5e96ee96f675c922ff9c6aff3?family=Dodo+Rounded");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+*{
+  font-family: "Nunito", serif;
+}
+
 body {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "Dodo Rounded";
 }
 
+#root{
+  max-width: 1300px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
