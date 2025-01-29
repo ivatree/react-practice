@@ -81,22 +81,6 @@
     }
 }
 
-.accepting{
-    cursor: pointer;
-    color: #FE7F1E;
-    background-color: #FFF0E6;
-    border: none;
-    border-radius: 2rem;
-    padding: 0.75rem;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.3s;
-    &:hover{
-        background-color: #FFD2B3;
-    }
-}
-
 .switchBtn{
     border: none;
     font-size: 1rem;

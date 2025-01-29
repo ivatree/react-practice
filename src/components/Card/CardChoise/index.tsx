@@ -8,7 +8,6 @@ interface BasketProps {
   title: string;
   description: string;
   price: number;
-  id: string;
 }
 
 export default function CardChoise({
@@ -16,7 +15,6 @@ export default function CardChoise({
   title,
   description,
   price,
-  id,
 }: BasketProps) {
   const addToBasket = () => {
     const selectedCard = { image, title, description, price, id };

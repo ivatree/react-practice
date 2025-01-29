@@ -46,7 +46,6 @@ export default function Card() {
     title: '',
     description: '',
     price: 0,
-    id: '',
   });
   const [cards, setCards] = useState<Card[]>([]);
 
