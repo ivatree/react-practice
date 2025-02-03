@@ -1,4 +1,4 @@
-@import '../../Styles/styles.modeule.scss';
+@import '../../styles/styles.module.scss';
 
 .regBtn{
     cursor: pointer;
@@ -35,7 +35,7 @@
     }
 }
 
-.addPizza{
+.addProduct{
     cursor: pointer;
     color: $mainorange;
     background-color: #FFF0E6;
@@ -53,12 +53,14 @@
 
 .openSort{
     cursor: pointer;
+    display: flex;
     background-color: transparent;
+    align-items: center;
     border: none;
-    float: left;
     font-size: $fontsm;
     font-weight: $fontbold;
-    text-align: left;
+    text-wrap: nowrap;
+
 }
 
 .closeModal{
@@ -114,6 +116,49 @@
     float: right;
     &:hover{
         transition: all 0.2s;
-        transform: scale(1.2);
+        transform: scale(1.2)
+    }
+}
+@media (max-width: 500px){
+    .choise{
+        font-size: $fontxs;
+        padding: $paddingsm;
+    }
+    .openSort{
+        display: none;
+    }
+    .addProduct{
+        font-size: $fontxs;
+        padding: $paddingmd;
+    }
+    .regBtn{
+        font-size: $fontxs;
+        padding: $paddingmd;
+    }
+}
+@media (min-width: 500px) and (max-width: 768px){
+    .addProduct{
+        font-size: $fontsm;
+        padding: $paddingmd;
+    }
+    .regBtn{
+        font-size: $fontsm;
+        padding: $paddingmd;
+    }
+    .choise{
+        font-size: $fontxs;
+        padding: $paddingsm;
+    }
+    .openSort{
+        font-size: $fontxs;
+    }
+}
+@media (min-width: 768px) and (max-width: 900px) {
+    .choise{
+        font-size: $fontsm;
+        padding: $paddingmd;
+    }
+    .openSort{
+        font-size: $fontsm;
     }
 }

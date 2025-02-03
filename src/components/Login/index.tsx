@@ -4,9 +4,8 @@ import { useDispatch } from 'react-redux';
 import { setUser } from 'store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import './Login.scss';
+import './styles.scss';
 import Button from 'components/Button';
-import styles from '../Button/Button.module.scss';
 
 export function Login() {
   const dispatch = useDispatch();
@@ -44,11 +43,7 @@ export function Login() {
       <h2 className="login-header">Авторизация</h2>
       <span>
         Нет аккаунта?
-        <Button
-          className={styles.switchBtn}
-          onClick={moveToSignUp}
-          text="Создать"
-        />
+        <Button className="switchBtn" onClick={moveToSignUp} text="Создать" />
       </span>
       <Form title="Войти" handleClick={handleLogin} />
     </div>

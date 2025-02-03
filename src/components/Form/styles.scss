@@ -1,16 +1,16 @@
-@import '../../Styles/styles.modeule.scss';
+@import '../../styles/styles.module.scss';
 
 .form-container{
     display: grid;
-    grid-template-rows: auto auto auto auto 35%;
-    width: $width;
+    grid-template-rows: auto auto 30%;
+    width: 100%;
     margin-left: $paddingmd;
     .input-outline{
         background-color: #00000005;
         display: flex;
         border-radius: $radius;
         height: 3rem;
-        width: $width;
+        width: 100%;
         align-items: center;
         justify-content: center;
         transition: all 0.2s;

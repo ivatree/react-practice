@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import './Navbar.scss';
+import './styles.scss';
 import Button from '../Button';
-import styles from '../Button/Button.module.scss';
-import { Menu } from '../DdMenu';
+import { Menu } from '../SortList';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 
 export default function Navbar() {
@@ -27,34 +26,34 @@ export default function Navbar() {
       <nav className="settings-container">
         <div className="choise-container">
           <Button
-            className={styles.choise}
+            className="choise"
             onClick={() => console.log()}
             text={'Все'}
           />
           <Button
-            className={styles.choise}
+            className="choise"
             onClick={() => console.log()}
             text={'Мясные'}
           />
           <Button
-            className={styles.choise}
+            className="choise"
             onClick={() => console.log()}
             text={'Вегетарианские'}
           />
           <Button
-            className={styles.choise}
+            className="choise"
             onClick={() => console.log()}
             text={'Гриль'}
           />
           <Button
-            className={styles.choise}
+            className="choise"
             onClick={() => console.log()}
             text={'Острые'}
           />
         </div>
         <div className="sort-settings">
           <Button
-            className={styles.openSort}
+            className="openSort"
             onClick={() => setOpenMenu((prev: boolean) => !prev)}
             text={
               <>

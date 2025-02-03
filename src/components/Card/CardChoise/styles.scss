@@ -1,4 +1,4 @@
-@import '../../../Styles/styles.modeule.scss';
+@import '../../../styles/styles.module.scss';
 
 .prewiew-container{
     display: grid;
@@ -57,7 +57,7 @@
                   display: none;
                 }
                 label {
-                  width: $width;
+                  width: 100%;
                   cursor: pointer;
                   display: flex;
                   justify-content: center;
@@ -89,7 +89,7 @@
                 .selection {
                     display: none;
                     position: absolute;
-                    height: $height;
+                    height: 100%;
                     width: calc(var(--container_width) / 3);
                     z-index: 0;
                     left: 0;
@@ -113,7 +113,7 @@
                   display: none;
                 }
                 .type-label {
-                    width: $width;
+                    width: 100%;
                     cursor: pointer;
                     display: flex;
                     justify-content: center;
@@ -140,7 +140,7 @@
                 .type-selection {
                     display: none;
                     position: absolute;
-                    height: $height;
+                    height: 100%;
                     width: 7.5rem;
                     z-index: 0;
                     left: 0;
@@ -157,4 +157,38 @@
         align-items: center;
         margin-left: 2rem;
     }
+}
+
+@media (min-width: 465px) and (max-width: 768px){
+  .prewiew-container{
+    .prewiew-body{
+      grid-template-rows: auto;
+      justify-content: center;
+      grid-template-rows: 50% 10% 25% 15%;
+      .card-image{
+        grid-row: 1;
+        grid-column: 1;
+        justify-self: center;
+      }
+      .card-title{
+        grid-row: 2;
+        grid-column: 1;
+        justify-self: center;
+      }
+      .card-description{
+        grid-row: 3;
+        grid-column: 1;
+        justify-self: center;
+
+      }
+      .card-settings{
+        grid-row: 4;
+        grid-column: 1;
+        justify-self: center;
+      }
+    }
+    .prewiew-footer{
+      margin-inline: 0;
+    }
+  }
 }

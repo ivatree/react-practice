@@ -2,11 +2,9 @@
   text-align: center;
 }
 
-.card-container{
-  width: 100%;
-  height: max-content;
-  justify-self: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 2rem;
+.main-container{
+  max-width: 1300px;    
+  margin-inline: auto;
+  padding-inline: 1.5rem;
 }
+

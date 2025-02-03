@@ -3,9 +3,8 @@ import { setUser } from 'store/slices/userSlice';
 import React from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Form } from '../Form';
-import './SignUp.scss';
+import './styles.scss';
 import Button from 'components/Button';
-import styles from '../Button/Button.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 export function SignUp() {
@@ -44,11 +43,7 @@ export function SignUp() {
       <h2 className="signUp-header">Регистрация</h2>
       <span>
         У вас есть аккаунт?
-        <Button
-          className={styles.switchBtn}
-          onClick={moveToLogin}
-          text="Войти"
-        />
+        <Button className="switchBtn" onClick={moveToLogin} text="Войти" />
       </span>
       <Form title="Зарегистрироваться" handleClick={handleRegister} />
     </div>

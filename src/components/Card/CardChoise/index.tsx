@@ -1,19 +1,16 @@
 import Button from 'components/Button';
-import styles from 'components/Button/Button.module.scss';
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { getBasket, saveBasket } from '../../../utils/firebase';
 
 interface BasketProps {
-  content: {
-    image: string;
-    title: string;
-    description: string;
-    price: number;
-  };
+  image: string;
+  title: string;
+  description: string;
+  price: number;
 }
 
-export default function CardChoice({ content }: BasketProps) {
+export default function CardChoice({ ...props }: BasketProps) {
   const [basketItem, setBasketItem] = useState([]);
 
   useEffect(() => {
@@ -25,8 +22,8 @@ export default function CardChoice({ content }: BasketProps) {
   }, []);
 
   const addToBasket = async () => {
-    if (content) {
-      const newItem = [...basketItem, content];
+    if (props) {
+      const newItem = [...basketItem, props];
       setBasketItem(newItem);
       console.log('Данные корзины сохранены', newItem);
       await saveBasket(newItem);
@@ -36,9 +33,9 @@ export default function CardChoice({ content }: BasketProps) {
   return (
     <div className="prewiew-container">
       <div className="prewiew-body">
-        <img className="card-image" src={content.image} alt={content?.title} />
-        <h3 className="card-title">{content.title}</h3>
-        <span className="card-description">{content.description}</span>
+        <img className="card-image" src={props.image} alt={props?.title} />
+        <h3 className="card-title">{props.title}</h3>
+        <span className="card-description">{props.description}</span>
         <div className="card-settings">
           <div className="size-input">
             <label>
@@ -80,9 +77,9 @@ export default function CardChoice({ content }: BasketProps) {
       </div>
       <div className="prewiew-footer">
         <Button
-          className={styles.addPizza}
+          className="addProduct"
           onClick={addToBasket}
-          text={`В корзину ${content.price} руб.`}
+          text={`В корзину ${props.price} руб.`}
         />
       </div>
     </div>

@@ -1,14 +1,15 @@
-@import '../../Styles/styles.modeule.scss';
+@import '../../styles/styles.module.scss';
 
 header{
-    width: $width;
+    width: 100%;
     height: 7rem;
     border-bottom: $lBorder;
     display: flex;
     justify-content: center;
     .headerContainer{
+        margin-inline: 1.5rem;
         width: $mWidth;
-        height: $height;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -36,7 +37,6 @@ header{
             .description{
                 grid-column: 2;
                 font-weight: $fontlight;
-                text-wrap: nowrap;
                 align-self: center;
                 color: #00000090;
             }
@@ -48,3 +48,23 @@ header{
         }
     }
 }
+
+@media (min-width: 400px) and (max-width: 768px){
+    header{
+        .headerContainer{
+            .containerForLogo{
+                .logo{
+                    width: 3rem;
+                    height: 3rem;
+                }
+                .title{
+                    font-size: $fontmd;
+                }
+                .description{
+                    font-size: $fontxs
+                }
+            }
+        }
+    }
+}
+@media (min-width: 768px) and (max-width: 900px){}
