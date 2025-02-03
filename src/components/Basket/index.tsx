@@ -1,11 +1,18 @@
-import Button from 'components/Button';
 import React, { useEffect, useState } from 'react';
-import styles from 'components/Button/Button.module.scss';
-import './Basket.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import store, { RootState } from '../../store/index';
 import { getBasket, clearBasket, deleteItem } from 'utils/firebase';
 import { AiOutlineClose } from 'react-icons/ai';
+import Card from 'components/Card/ProductCard';
+import Button from 'components/Button';
+import {
+  addProductToBasket,
+  removeProductFromBasket,
+} from 'store/slices/productSlice';
+import './styles.scss';
 
 interface BasketItem {
+  id: string;
   image: string;
   title: string;
   description: string;
@@ -23,36 +30,52 @@ export function Basket({
   closebasket,
   initialItems = [],
 }: BasketProps) {
+  const dispatch = useDispatch();
+  const productCards = useSelector((state: RootState) => state.productCards);
   const [basketItems, setBasketItems] = useState(initialItems);
 
   useEffect(() => {
     if (isOpen) {
       const fetchBasket = async () => {
         const fetchItems = await getBasket();
-        console.log('Данные получены', fetchItems);
         setBasketItems(fetchItems || []);
+        fetchItems.forEach((item) => dispatch(addProductToBasket(item)));
+        console.log(store.getState());
       };
       fetchBasket();
     }
-  }, [isOpen]);
+  }, [isOpen, dispatch]);
 
-  const deleteProduct = async (itemToDelete: BasketItem) => {
+  const deleteProduct = async (itemToDelete) => {
     await deleteItem(itemToDelete);
     setBasketItems((prevItems) =>
       prevItems.filter((item) => item !== itemToDelete)
     );
+    dispatch(removeProductFromBasket({ id: itemToDelete.id }));
   };
 
   const clearBasketPage = async () => {
     setBasketItems([]);
     await clearBasket();
+    productCards.forEach((item) =>
+      dispatch(removeProductFromBasket({ id: item.id }))
+    );
   };
 
   const finishBuy = async () => {
-    alert('Ваш заказ одобрен');
-    setBasketItems([]);
-    await clearBasket();
-    closebasket();
+    if (basketItems.length) {
+      alert('Ваш заказ одобрен!');
+      // тут должен быть кастомный алерт, но пока что его нет
+      setBasketItems([]);
+      await clearBasket();
+      productCards.forEach((item) =>
+        dispatch(removeProductFromBasket({ id: item.id }))
+      );
+      closebasket();
+    } else {
+      alert('В вашей корзине ничего нет :с');
+      //и тут должен быть кастомный алерт
+    }
   };
 
   const getTotalPrice = () => {
@@ -62,51 +85,49 @@ export function Basket({
 
   return (
     <div>
-      {basketItems.length === 0 ? (
-        <div className="basket-container">
-          <div className="basket-head">
-            <h2 className="basket-title">Корзина</h2>
-          </div>
-          <div className="basket-body">
-            <h3 className="basket-message">Корзина пустая</h3>
-          </div>
+      <div className="basket-container">
+        <div className="basket-head">
+          <h2 className="basket-title">Корзина</h2>
         </div>
-      ) : (
-        <div className="basket-container">
-          <div className="basket-head">
-            <h2 className="basket-title">Корзина</h2>
-          </div>
-          <div className="basket-body">
-            {basketItems.map((item, index) => (
+        <div className="basket-body">
+          {basketItems.length > 0 ? (
+            basketItems.map((item, index) => (
               <div key={index} className="basket-item">
-                <img className="item-image" src={item.image} alt={item.title} />
-                <h3 className="item-title">{item.title}</h3>
-                <span className="item-description">{item.description}</span>
-                <h4 className="item-price">Цена {item.price} руб.</h4>
-                <div className="item-delete">
-                  <Button
-                    className={styles.deleteItem}
-                    onClick={() => deleteProduct(item)}
-                    text={<AiOutlineClose />}
-                  />
-                </div>
+                <Card
+                  key={index}
+                  image={item.image}
+                  title={item.title}
+                  description={item.description}
+                  price={item.price}
+                  onClick={() => console.log('')}
+                >
+                  <div className="delete-item">
+                    <Button
+                      className="deleteItem"
+                      onClick={() => deleteProduct(item)}
+                      text={<AiOutlineClose />}
+                    />
+                  </div>
+                </Card>
               </div>
-            ))}
-          </div>
-          <div className="btn-container">
-            <Button
-              className={styles.regBtn}
-              onClick={finishBuy}
-              text={`Заказать: ${getTotalPrice()} руб.`}
-            />
-            <Button
-              className={styles.addPizza}
-              onClick={clearBasketPage}
-              text="Очистить"
-            />
-          </div>
+            ))
+          ) : (
+            <h3 className="basket-message">Корзина пустая</h3>
+          )}
         </div>
-      )}
+        <div className="btn-container">
+          <Button
+            className="regBtn"
+            onClick={finishBuy}
+            text={`Заказать: ${getTotalPrice()} руб.`}
+          />
+          <Button
+            className="addProduct"
+            onClick={clearBasketPage}
+            text="Очистить"
+          />
+        </div>
+      </div>
     </div>
   );
 }

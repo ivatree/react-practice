@@ -1,0 +1,38 @@
+@import '../../styles/styles.module.scss';
+
+.settings-container{
+    display: flex;
+    width: 100%;
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    margin-block: 1rem;
+    justify-content: space-between;
+    margin-top: 2rem;
+    .choise-container{
+        display: flex;
+        gap: 0.75rem;
+        
+    }
+    .selected-option{
+        color: $mainorange;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-underline-offset: 0.25rem;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 768px ){
+    .settings-container{
+        justify-content: center;
+    }
+}
+
+@media (min-width: 768px ) and (max-width: 900px){
+    .settings-container{
+        max-width: 900px;
+        .choise-container{
+            gap: 0.5rem;
+        }
+    }
+}

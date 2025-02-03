@@ -1,117 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import './Header.scss';
-import pizzalogo from './pizzalogo.png';
-import Button from '../Button';
-import styles from '../Button/Button.module.scss';
-import { Modal } from '../Modal';
-import { SignUp } from 'components/SignUp';
-import { Basket } from 'components/Basket/index';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Login } from 'components/Login';
+import React from 'react';
+import './styles.scss';
+import pizzalogo from '../../assets/pizzalogoB.png';
+import Button from '../Button/index';
 
-export default function Header() {
-  const navigate = useNavigate();
-  const [modalActive, setModalActive] = useState(false);
-  const [isUser, setIsUser] = useState(false);
-  const [selectComponent, setSelectComponent] = useState({
-    image: '',
-    title: '',
-    description: '',
-    price: 0,
-    id: '',
-  });
-
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      setIsUser(true);
-    }
-  }, []);
-
-  const LogOut = () => {
-    localStorage.clear();
-    window.location.reload();
-  };
-
-  const openRegForm = () => {
-    setModalActive(true);
-    navigate('/SignUp');
-  };
-
-  const openBasket = (
+interface HeaderProps {
+  openBasket: (
     image: string,
     title: string,
     description: string,
     price: number,
     id: string
-  ) => {
-    setSelectComponent({ image, title, description, price, id });
-    setModalActive(true);
-    navigate('/Basket');
+  ) => void;
+  openRegForm: () => void;
+  LogOut: () => void;
+  isUser: boolean;
+  selectComponent: {
+    image: string;
+    title: string;
+    description: string;
+    price: number;
+    id: string;
   };
+}
 
-  const closeModal = () => {
-    navigate('/');
-    setModalActive(false);
-  };
-
+export default function Header({
+  openBasket,
+  openRegForm,
+  LogOut,
+  isUser,
+  selectComponent,
+}: HeaderProps) {
   return (
-    <>
-      <header>
-        <div className="headerContainer">
-          <div className="containerForLogo">
-            <img className="logo" src={pizzalogo} alt="Logo" />
-            <span className="title">REACT PIZZA</span>
-            <span className="description">
-              самая вкусная пицца во вселенной
-            </span>
-          </div>
-          <div className="containerForBtn">
-            <Button
-              className={styles.regBtn}
-              onClick={() =>
-                openBasket(
-                  selectComponent.image,
-                  selectComponent.title,
-                  selectComponent.description,
-                  selectComponent.price,
-                  selectComponent.id
-                )
-              }
-              text={'Корзина'}
-            />
-            {isUser ? (
-              <Button
-                className={styles.regBtn}
-                onClick={LogOut}
-                text={'Выйти'}
-              />
-            ) : (
-              <Button
-                className={styles.regBtn}
-                onClick={openRegForm}
-                text={'Регистрация'}
-              />
-            )}
-          </div>
+    <header>
+      <div className="headerContainer">
+        <div className="containerForLogo">
+          <img className="logo" src={pizzalogo} alt="Logo" />
+          <span className="title">REACT PIZZA</span>
+          <span className="description">самая вкусная пицца во вселенной</span>
         </div>
-        <Modal active={modalActive} closeModal={closeModal}>
-          <Routes>
-            <Route path="/SignUp" element={<SignUp />} />
-            <Route path="/Login" element={<Login />} />
-            <Route
-              path="/Basket"
-              element={
-                <Basket
-                  isOpen={true}
-                  closebasket={closeModal}
-                  initialItems={[]}
-                />
-              }
+        <div className="containerForBtn">
+          <Button
+            className="regBtn"
+            onClick={() =>
+              openBasket(
+                selectComponent.image,
+                selectComponent.title,
+                selectComponent.description,
+                selectComponent.price,
+                selectComponent.id
+              )
+            }
+            text={'Корзина'}
+          />
+          {isUser ? (
+            <Button className="regBtn" onClick={LogOut} text={'Выйти'} />
+          ) : (
+            <Button
+              className="regBtn"
+              onClick={openRegForm}
+              text={'Регистрация'}
             />
-          </Routes>
-        </Modal>
-      </header>
-    </>
+          )}
+        </div>
+      </div>
+    </header>
   );
 }

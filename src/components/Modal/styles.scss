@@ -1,4 +1,4 @@
-@import '../../Styles/styles.modeule.scss';
+@import '../../styles/styles.module.scss';
 
 .modal{
     min-width: 100vw;
@@ -27,5 +27,13 @@
     cursor:default;
     .modal-content{
         transform: scale(1);
+    }
+}
+
+@media (max-width: 500px){
+    .modal{
+        .modal-content{
+            width: 24rem;
+        }
     }
 }

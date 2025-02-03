@@ -1,7 +1,6 @@
 import React from 'react';
-import './Modal.scss';
+import './styles.scss';
 import Button from 'components/Button';
-import styles from 'components/Button/Button.module.scss';
 import { AiOutlineClose } from 'react-icons/ai';
 
 interface ModalProps {
@@ -26,7 +25,7 @@ export function Modal({ active, closeModal, children }: ModalProps) {
     >
       <div className="modal-content">
         <Button
-          className={styles.closeModal}
+          className="closeModal"
           onClick={closeModal}
           text={<AiOutlineClose />}
         />

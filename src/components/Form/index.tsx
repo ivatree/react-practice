@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'components/Button';
-import styles from '../Button/Button.module.scss';
-import './Form.scss';
+import './styles.scss';
+import { Input } from './Input';
 
 interface FormProps {
   title: string;
@@ -14,27 +14,23 @@ export function Form({ title, handleClick }: FormProps) {
 
   return (
     <div className="form-container">
-      <h3>Email:</h3>
-      <div className="input-outline">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Введите Email"
-        />
-      </div>
-      <h3>Пароль:</h3>
-      <div className="input-outline">
-        <input
-          type="password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          placeholder="Введите пароль"
-        />
-      </div>
+      <Input
+        title="Email"
+        type="email"
+        value={email}
+        handler={(e) => setEmail(e.target.value)}
+        text="Введите Email"
+      />
+      <Input
+        title="Пароль"
+        type="password"
+        value={pass}
+        handler={(e) => setPass(e.target.value)}
+        text="Введите пароль"
+      />
       <div className="btn-container">
         <Button
-          className={styles.choise}
+          className="choise"
           onClick={() => handleClick(email, pass)}
           text={title}
         />

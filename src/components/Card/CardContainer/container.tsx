@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../Button';
-import styles from '../Button/Button.module.scss';
-import './Card.scss';
-import { Modal } from '../Modal';
+import { Modal } from 'components/Modal';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, getDocs, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import CardChoice from './CardChoise';
+import CardChoice from '../CardChoise';
+import Card from '../ProductCard';
+import './styles.scss';
+import Button from 'components/Button';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -37,7 +37,7 @@ const fetchCards = async (): Promise<Card[]> => {
   return cards;
 };
 
-export default function Card() {
+export default function CardContainer() {
   const [modalActive, setModalActive] = useState(false);
   const navigate = useNavigate();
 
@@ -74,33 +74,28 @@ export default function Card() {
   };
 
   return (
-    <>
+    <div className="container">
       {cards.map((card) => (
-        <div
+        <Card
           key={card.id}
-          className="pizza-card"
+          image={card.image}
+          title={card.title}
+          description={card.description}
+          price={card.price}
           onClick={() =>
             openModal(card.image, card.title, card.description, card.price)
           }
         >
-          <img className="pizza-prewie" src={card.image} alt={card.title} />
-          <span className="pizza-title">{card.title}</span>
-          <span className="pizza-description">{card.description}</span>
-          <div className="pizza-add-container">
-            <span className="pizza-price">от {card.price} руб.</span>
-            <Button
-              className={styles.addPizza}
-              onClick={() =>
-                openModal(card.image, card.title, card.description, card.price)
-              }
-              text={'Выбрать'}
-            />
-          </div>
-        </div>
+          <Button
+            className="addProduct"
+            onClick={() => openModal}
+            text="Выбрать"
+          />
+        </Card>
       ))}
       <Modal active={modalActive} closeModal={closeModal}>
-        <CardChoice content={selectComponent} />
+        <CardChoice {...selectComponent} />
       </Modal>
-    </>
+    </div>
   );
 }
