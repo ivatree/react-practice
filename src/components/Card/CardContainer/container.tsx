@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'components/Modal';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import {
+  getFirestore,
+  getDocs,
+  collection,
+  query,
+  orderBy,
+  QuerySnapshot,
+  DocumentData,
+  CollectionReference,
+  Query,
+} from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import CardChoice from '../CardChoise';
 import Card from '../ProductCard';
@@ -19,6 +29,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const productsRef = collection(db, 'pizza-card');
+const sortByPrice = query(productsRef, orderBy('price'));
+const sortByTitle = query(productsRef, orderBy('title'));
 
 interface Card {
   id: string;
@@ -28,8 +41,9 @@ interface Card {
   price: number;
 }
 
-const fetchCards = async (): Promise<Card[]> => {
-  const querySnapshot = await getDocs(collection(db, 'pizza-card'));
+const fetchCards = async (sortingQuery): Promise<Card[]> => {
+  const querySnapshot: QuerySnapshot<DocumentData> =
+    await getDocs(sortingQuery);
   const cards: Card[] = [];
   querySnapshot.forEach((doc) => {
     cards.push({ id: doc.id, ...(doc.data() as Card) });
@@ -40,7 +54,6 @@ const fetchCards = async (): Promise<Card[]> => {
 export default function CardContainer() {
   const [modalActive, setModalActive] = useState(false);
   const navigate = useNavigate();
-
   const [selectComponent, setSelectComponent] = useState({
     image: '',
     title: '',
@@ -48,14 +61,34 @@ export default function CardContainer() {
     price: 0,
   });
   const [cards, setCards] = useState<Card[]>([]);
+  const [sorting, setSorting] = useState<
+    Query<DocumentData> | CollectionReference<DocumentData>
+  >(productsRef);
+
+  useEffect(() => {
+    const updateSorting = () => {
+      if (window.location.href.includes('/Price')) {
+        setSorting(sortByPrice);
+      } else if (window.location.href.includes('/Name')) {
+        setSorting(sortByTitle);
+      } else {
+        setSorting(productsRef);
+      }
+    };
+    updateSorting();
+  });
 
   useEffect(() => {
     const getData = async () => {
-      const data = await fetchCards();
+      const data = await fetchCards(sorting);
       setCards(data);
     };
     getData();
-  }, []);
+  }, [sorting]);
+
+  useEffect(() => {
+    navigate('/');
+  }, [window.location.reload]);
 
   const closeModal = () => {
     setModalActive(false);

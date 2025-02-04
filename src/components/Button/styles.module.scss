@@ -28,11 +28,25 @@
     font-size: $fontsm;
     font-weight: $fontbold;
     text-align: center;
-    transition: all 0.2s;
+    transition: all 0.3s;
     &:hover{
+        transition: all 0.3s;
         color: $white;
         background-color: $gray;
     }
+}
+
+.active{
+    color: $white;
+    background-color: $gray;
+    border: none;
+    border-radius: $radius;
+    padding: $paddingmd;
+    padding-inline: $inline-padding;
+    font-size: $fontsm;
+    font-weight: $fontbold;
+    text-align: center;
+    transition: all 0.2s;
 }
 
 .addProduct{
@@ -119,6 +133,7 @@
         transform: scale(1.2)
     }
 }
+
 @media (max-width: 500px){
     .choise{
         font-size: $fontxs;
@@ -136,6 +151,7 @@
         padding: $paddingmd;
     }
 }
+
 @media (min-width: 500px) and (max-width: 768px){
     .addProduct{
         font-size: $fontsm;
@@ -153,6 +169,7 @@
         font-size: $fontxs;
     }
 }
+
 @media (min-width: 768px) and (max-width: 900px) {
     .choise{
         font-size: $fontsm;

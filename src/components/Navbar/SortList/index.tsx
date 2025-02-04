@@ -2,7 +2,9 @@ import React from 'react';
 import './styles.scss';
 
 interface MenuProps {
-  options: { [key: string]: string };
+  options: {
+    [key: string]: { title: string; url?: () => void };
+  };
   selectedOption: string;
   onOptionChange: (option: string) => void;
 }
@@ -19,9 +21,12 @@ export function Menu({ options, onOptionChange }: MenuProps) {
           <li
             key={option}
             className="menu-item"
-            onClick={() => handleOptionClick(option)}
+            onClick={() => {
+              handleOptionClick(option);
+              options[option].url?.();
+            }}
           >
-            {options[option]}
+            {options[option].title}
           </li>
         ))}
       </ul>

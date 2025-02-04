@@ -4,6 +4,7 @@
 
 
 .container{
+    max-width: 1300px;
     height: max-content;
     justify-self: center;
     display: grid;
@@ -28,7 +29,7 @@
             .product-prewie{
                 grid-row: 1;
                 grid-column: 1 / all;
-                width: 20rem;
+                width: 18rem;
                 transition: all 0.3s;
             }
             .product-title{
