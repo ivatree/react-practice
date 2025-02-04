@@ -1,10 +1,10 @@
-@import '../../styles/styles.module.scss';
+@import '/src/styles/styles.module.scss';
 
 .menu-list{
     z-index: 1;
     background-color: $white;
-    top: 17%;
-    right: 15.5%;
+    top: 18%;
+    right: 15%;
     position: absolute;
     border: $lBorder;
     border-radius:15px;
@@ -15,11 +15,5 @@
         height: 2.25rem;
         display: flex;
         align-items: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        &:hover{
-            transition: all 0.2s;
-            color: $mainorange;
-        }
     }
 }
