@@ -9,8 +9,6 @@ import {
   orderBy,
   QuerySnapshot,
   DocumentData,
-  CollectionReference,
-  Query,
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import CardChoice from '../CardChoise';
@@ -30,8 +28,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const productsRef = collection(db, 'pizza-card');
-const sortByPrice = query(productsRef, orderBy('price'));
-const sortByTitle = query(productsRef, orderBy('title'));
+
+const sortQueries = {
+  popular: productsRef,
+  price: query(productsRef, orderBy('price')),
+  title: query(productsRef, orderBy('title')),
+};
 
 interface Card {
   id: string;
@@ -41,7 +43,16 @@ interface Card {
   price: number;
 }
 
+interface CardContainerProps {
+  sorting: string;
+  setSorting: (option: string) => void;
+}
+
 const fetchCards = async (sortingQuery): Promise<Card[]> => {
+  if (!sortingQuery) {
+    throw new Error('Invalid query');
+  }
+
   const querySnapshot: QuerySnapshot<DocumentData> =
     await getDocs(sortingQuery);
   const cards: Card[] = [];
@@ -51,7 +62,7 @@ const fetchCards = async (sortingQuery): Promise<Card[]> => {
   return cards;
 };
 
-export default function CardContainer() {
+export default function CardContainer({ sorting }: CardContainerProps) {
   const [modalActive, setModalActive] = useState(false);
   const navigate = useNavigate();
   const [selectComponent, setSelectComponent] = useState({
@@ -61,34 +72,15 @@ export default function CardContainer() {
     price: 0,
   });
   const [cards, setCards] = useState<Card[]>([]);
-  const [sorting, setSorting] = useState<
-    Query<DocumentData> | CollectionReference<DocumentData>
-  >(productsRef);
-
-  useEffect(() => {
-    const updateSorting = () => {
-      if (window.location.href.includes('/Price')) {
-        setSorting(sortByPrice);
-      } else if (window.location.href.includes('/Name')) {
-        setSorting(sortByTitle);
-      } else {
-        setSorting(productsRef);
-      }
-    };
-    updateSorting();
-  });
 
   useEffect(() => {
     const getData = async () => {
-      const data = await fetchCards(sorting);
+      const sortingQuery = sortQueries[sorting];
+      const data = await fetchCards(sortingQuery);
       setCards(data);
     };
     getData();
   }, [sorting]);
-
-  useEffect(() => {
-    navigate('/');
-  }, [window.location.reload]);
 
   const closeModal = () => {
     setModalActive(false);
@@ -107,7 +99,7 @@ export default function CardContainer() {
   };
 
   return (
-    <div className="container">
+    <article className="container">
       {cards.map((card) => (
         <Card
           key={card.id}
@@ -129,6 +121,6 @@ export default function CardContainer() {
       <Modal active={modalActive} closeModal={closeModal}>
         <CardChoice {...selectComponent} />
       </Modal>
-    </div>
+    </article>
   );
 }

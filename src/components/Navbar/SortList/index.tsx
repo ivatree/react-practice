@@ -3,7 +3,7 @@ import './styles.scss';
 
 interface MenuProps {
   options: {
-    [key: string]: { title: string; url?: () => void };
+    [key: string]: { title: string };
   };
   selectedOption: string;
   onOptionChange: (option: string) => void;
@@ -23,7 +23,6 @@ export function Menu({ options, onOptionChange }: MenuProps) {
             className="menu-item"
             onClick={() => {
               handleOptionClick(option);
-              options[option].url?.();
             }}
           >
             {options[option].title}

@@ -1,11 +1,11 @@
 @import '/src/styles/styles.module.scss';
 
 .menu-list{
-    z-index: 1;
-    background-color: $white;
-    top: 18%;
-    right: 15%;
+    z-index: 1000;
     position: absolute;
+    top: 45%;
+    right: 1%;
+    background-color: $white;
     border: $lBorder;
     border-radius:15px;
     padding-block: $paddingmd;

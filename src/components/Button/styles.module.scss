@@ -74,7 +74,6 @@
     font-size: $fontsm;
     font-weight: $fontbold;
     text-wrap: nowrap;
-
 }
 
 .closeModal{
@@ -135,33 +134,27 @@
 }
 
 @media (max-width: 500px){
-    .choise{
+    .choise, .active{
         font-size: $fontxs;
         padding: $paddingsm;
     }
+    .addProduct,  .regBtn{
+        font-size: $fontxs;
+        padding: $paddingmd;
+    }
     .openSort{
-        display: none;
-    }
-    .addProduct{
         font-size: $fontxs;
-        padding: $paddingmd;
-    }
-    .regBtn{
-        font-size: $fontxs;
-        padding: $paddingmd;
+        display: flex;
+        flex-direction: column;
     }
 }
 
 @media (min-width: 500px) and (max-width: 768px){
-    .addProduct{
+    .addProduct,  .regBtn{
         font-size: $fontsm;
         padding: $paddingmd;
     }
-    .regBtn{
-        font-size: $fontsm;
-        padding: $paddingmd;
-    }
-    .choise{
+    .choise, .active{
         font-size: $fontxs;
         padding: $paddingsm;
     }
@@ -171,7 +164,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 900px) {
-    .choise{
+    .choise, .active{
         font-size: $fontsm;
         padding: $paddingmd;
     }
