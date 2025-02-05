@@ -9,8 +9,8 @@ import { Modal } from 'components/Modal';
 import { SignUp } from 'components/SignUp';
 import { Basket } from 'components/Basket/index';
 import { Login } from 'components/Login';
-import CardContainer from 'components/Card/CardContainer/container';
 import { clearBasket } from 'utils/firebase';
+import CardContainer from 'components/Card/CardContainer/container';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ function App() {
     price: 0,
     id: '',
   });
+  const [sorting, setSorting] = useState('popular');
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -69,10 +70,10 @@ function App() {
       isUser={isUser}
       selectComponent={selectComponent}
     >
-      <div className="main-container">
-        <Navbar />
-        <CardContainer />
-      </div>
+      <Navbar setSorting={setSorting} />
+      <section className="main-container">
+        <CardContainer sorting={sorting} setSorting={setSorting} />
+      </section>
       <Modal active={modalActive} closeModal={closeModal}>
         <Routes>
           <Route path="/SignUp" element={<SignUp />} />

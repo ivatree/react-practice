@@ -2,35 +2,37 @@ import React, { useState } from 'react';
 import './styles.scss';
 import Button from '../Button';
 import { Menu } from './SortList';
-
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
 import { Choise } from './ChoiseList';
 
-export default function Navbar() {
+interface NavbarProps {
+  setSorting: (option: string) => void;
+}
+
+export default function Navbar({ setSorting }: NavbarProps) {
   const [openMenu, setOpenMenu] = useState(false);
   const [selectedOption, setSelectedOption] = useState('popular');
   const [selectedChoiseOption, setSelectedChoiseOption] = useState('all');
-  const navigate = useNavigate();
   const arrow = openMenu ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />;
 
   const options = {
     popular: {
       title: 'популярности',
-      url: () => navigate('/'),
+      sortKey: 'popular',
     },
-    cost: {
+    price: {
       title: 'цене',
-      url: () => navigate('/Price'),
+      sortKey: 'price',
     },
-    alphabet: {
+    title: {
       title: 'алфавиту',
-      url: () => navigate('/Name'),
+      sortKey: 'title',
     },
   };
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option);
+    setSorting(option);
     setOpenMenu(false);
   };
 
@@ -59,25 +61,26 @@ export default function Navbar() {
         <div className="sort-settings">
           <Button
             className="openSort"
-            onClick={() => setOpenMenu((prev: boolean) => !prev)}
+            onClick={() => setOpenMenu((prev) => !prev)}
             text={
               <>
-                {arrow} Сортировка по:{' '}
+                <span className="selected-arrow">{arrow}</span>
+                <span className="selected-text">Сортировка по:</span>
                 <span className="selected-option">
                   {options[selectedOption].title}
                 </span>
               </>
             }
-          ></Button>
+          />
+          {openMenu && (
+            <Menu
+              selectedOption={selectedOption}
+              options={options}
+              onOptionChange={handleOptionChange}
+            />
+          )}
         </div>
       </nav>
-      {openMenu && (
-        <Menu
-          selectedOption={selectedOption}
-          options={options}
-          onOptionChange={handleOptionChange}
-        />
-      )}
     </>
   );
 }

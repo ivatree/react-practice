@@ -19,6 +19,7 @@
         min-width: 25rem;
         min-height: 25rem;
         transform: scale(0);
+        margin: 0;
     }
 }
 .active{
@@ -33,7 +34,7 @@
 @media (max-width: 500px){
     .modal{
         .modal-content{
-            width: 24rem;
+            min-width: 80%;
         }
     }
 }

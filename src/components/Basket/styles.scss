@@ -83,21 +83,26 @@
     }
 }
 
-@media (max-width: 500px){
-.basket-container{
-    overflow-x: none;
-        .product{
-            width: 22.5rem;
-            height: 10rem;
-            .product-prewie{
-                width: 5rem;
-                height: 5rem;
-            }
-            .product-title{
-                font-size: $fontsm;
-            }
-            .product-description{
-                font-size: $fontsm;
+@media (min-width: 400px) and (max-width: 500px){
+    .basket-container{
+        .basket-body{
+            .basket-item{
+                overflow-x: none;
+                .product{
+                    min-width: 17rem;
+                    height: 10rem;
+                    .product-prewie{
+                        width: 6rem;
+                        height: 6rem;
+                    }
+                    .product-title{
+                        font-size: $fontsm;
+                    }
+                    .product-description{
+                        width: 14rem;
+                        font-size: $fontxs;
+                    }
+                }
             }
         }
     }
