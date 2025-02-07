@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import store, { RootState } from '../../store/index';
+import store, { RootState } from 'store';
 import { getBasket, clearBasket, deleteItem } from 'utils/firebase';
 import { AiOutlineClose } from 'react-icons/ai';
 import Card from 'components/Card/ProductCard';
@@ -21,13 +22,13 @@ interface BasketItem {
 
 interface BasketProps {
   isOpen: boolean;
-  closebasket: () => void;
+  closeBasket: () => void;
   initialItems: BasketItem[];
 }
 
 export function Basket({
   isOpen,
-  closebasket,
+  closeBasket,
   initialItems = [],
 }: BasketProps) {
   const dispatch = useDispatch();
@@ -38,8 +39,12 @@ export function Basket({
     if (isOpen) {
       const fetchBasket = async () => {
         const fetchItems = await getBasket();
-        setBasketItems(fetchItems || []);
-        fetchItems.forEach((item) => dispatch(addProductToBasket(item)));
+        if (fetchItems) {
+          setBasketItems(fetchItems);
+          fetchItems.forEach((item) => dispatch(addProductToBasket(item)));
+        } else {
+          setBasketItems([]);
+        }
         console.log(store.getState());
       };
       fetchBasket();
@@ -65,16 +70,14 @@ export function Basket({
   const finishBuy = async () => {
     if (basketItems.length) {
       alert('Ваш заказ одобрен!');
-      // тут должен быть кастомный алерт, но пока что его нет
       setBasketItems([]);
       await clearBasket();
       productCards.forEach((item) =>
         dispatch(removeProductFromBasket({ id: item.id }))
       );
-      closebasket();
+      closeBasket();
     } else {
       alert('В вашей корзине ничего нет :с');
-      //и тут должен быть кастомный алерт
     }
   };
 

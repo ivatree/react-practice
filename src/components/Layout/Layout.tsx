@@ -1,6 +1,8 @@
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-import React from 'react';
+import Navbar from 'components/Navbar';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -13,7 +15,6 @@ interface LayoutProps {
   ) => void;
   openRegForm: () => void;
   LogOut: () => void;
-  isUser: boolean;
   selectComponent: {
     image: string;
     title: string;
@@ -28,18 +29,20 @@ const Layout = ({
   openBasket,
   openRegForm,
   LogOut,
-  isUser,
   selectComponent,
 }: LayoutProps) => {
+  const [sorting, setSorting] = useState('popular');
+
   return (
     <>
       <Header
         openBasket={openBasket}
         openRegForm={openRegForm}
         LogOut={LogOut}
-        isUser={isUser}
         selectComponent={selectComponent}
       />
+      <Navbar setSorting={setSorting} />
+      <Outlet></Outlet>
       {children}
       <Footer />
     </>

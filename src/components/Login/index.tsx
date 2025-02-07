@@ -1,11 +1,13 @@
 import React from 'react';
-import { Form } from '../Form';
+import { Form } from 'components/Form/RegForm';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import './styles.scss';
 import Button from 'components/Button';
+import { db, replaceGuestBasket } from 'utils/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 export function Login() {
   const dispatch = useDispatch();
@@ -20,15 +22,21 @@ export function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        user.getIdToken().then((token) => {
-          const userData = {
-            email: user.email,
-            id: user.uid,
-            token: token,
-          };
-          dispatch(setUser(userData));
-          localStorage.setItem('user', JSON.stringify(userData));
-          window.location.reload();
+        user.getIdToken().then(async (token) => {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          if (userDoc.exists()) {
+            const userData = {
+              email: user.email,
+              id: user.uid,
+              token: token,
+              admin: userDoc.data().admin,
+            };
+            dispatch(setUser(userData));
+            await replaceGuestBasket(user.uid);
+            navigate('/');
+          } else {
+            console.error('Документ пользователя не существует');
+          }
         });
         console.log(user);
       })

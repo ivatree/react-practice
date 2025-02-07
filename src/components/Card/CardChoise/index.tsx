@@ -1,7 +1,7 @@
 import Button from 'components/Button';
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
-import { getBasket, saveBasket } from '../../../utils/firebase';
+import { getBasket, saveBasket } from 'utils/firebase';
 
 interface BasketProps {
   image: string;

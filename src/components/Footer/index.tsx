@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.scss';
-import pizzalogo from '../../assets/pizzalogoW.png';
+import pizzalogo from 'assets/pizzalogoW.png';
 
 export default function Footer() {
   return (
