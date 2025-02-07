@@ -1,0 +1,19 @@
+@import 'styles/styles.module.scss';
+
+.change-container{
+    height: max-content;
+    .change-title{
+        font-size: 24px;
+        font-weight: $fontbold;
+    }
+    .change-body{
+        display: grid;
+        align-items: center;
+        grid-row-gap: 1rem;
+    }
+    .change-footer{
+        margin-top: 2rem;
+        display: flex;
+        justify-self: center;
+    }
+}

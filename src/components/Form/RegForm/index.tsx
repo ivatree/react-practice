@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'components/Button';
 import './styles.scss';
-import { Input } from './Input';
+import { Input } from 'components/Form/Input';
 
 interface FormProps {
   title: string;

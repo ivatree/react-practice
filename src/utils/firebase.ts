@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { deleteField, getFirestore, setDoc, updateDoc, doc, getDoc, arrayRemove } from "firebase/firestore";
+import { deleteField, getFirestore, setDoc, updateDoc, doc, getDoc, arrayRemove, addDoc, collection, deleteDoc,} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -16,93 +16,133 @@ const auth = getAuth(app)
 const db = getFirestore(app)
 
 const saveBasket = async (items) => {
-    const user = auth.currentUser;
-
-    if(user){
-        try{
-            console.log("Сохранение данных для пользователя", user.uid);
-            console.log("Сохраняем данные", items);
-            await setDoc(doc(db, 'basket', user.uid), {
-                items: items
-            })
-            console.log('Корзина успешно сохранена в fireabse');            
-        }catch(e){
-            console.error("Ошибка сохранения коризины", e);
-        }
-    } else {
-        console.error("Пользователь не авторирован");
-    }
-}
+  const user = auth.currentUser;
+  const userId = user ? user.uid : 'guest';
+  try {
+      await setDoc(doc(db, 'basket', userId), {
+          items: items
+      });
+  } catch (e) {
+      console.error("Ошибка сохранения корзины", e);
+  }
+};
 
 const clearBasket = async () => {
-    const user = auth.currentUser;
-    if (user) {
-      try {
-        const docRef = doc(db, 'basket', user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
+  const user = auth.currentUser;
+  const userId = user ? user.uid : 'guest';
+  try {
+      const docRef = doc(db, 'basket', userId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
           await updateDoc(docRef, {
-            items: deleteField()
+              items: deleteField()
           });
-          console.log('Корзина успешно очищена в firebase');
-        } else {
+      } else {
           console.log('Документ не найден. Создание нового документа.');
           await setDoc(docRef, { items: [] });
-          console.log('Новый документ создан.');
-        }
-      } catch (e) {
-        console.error('Ошибка очистки корзины', e);
       }
-    } else {
-      console.error('Пользователь не авторизован');
-    }
-  };  
+  } catch (e) {
+      console.error('Ошибка очистки корзины', e);
+  }
+};
 
 const deleteItem = async (itemToDelete) => {
   const user = auth.currentUser;
-    if (user) {
-      try {
-        const docRef = doc(db, 'basket', user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
+  const userId = user ? user.uid : 'guest';
+  try {
+      const docRef = doc(db, 'basket', userId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
           await updateDoc(docRef, {
-            items: arrayRemove(itemToDelete)
+              items: arrayRemove(itemToDelete)
           });
-          console.log('Элемент успешно удален!');
-        } else {
-          console.log('Документ не найден. Создание нового документа.');
+      } else {
           await setDoc(docRef, { items: [] });
-          console.log('Новый документ создан.');
-        }
-      } catch (e) {
-        console.error('Ошибка удаления элемента из корзины', e);
       }
-    } else {
-      console.error('Пользователь не авторизован');
-    }
-} 
+  } catch (e) {
+      console.error('Ошибка удаления элемента из корзины', e);
+  }
+};
 
 const getBasket = async () => {
-    const user = auth.currentUser
-    
-    if(user){
-        try {
-            console.log("Данные пользователя", user.uid);
-            const docSnap = await getDoc(doc(db, 'basket', user.uid))
-            if(docSnap.exists()){
-                console.log('Данные коризины', docSnap.data().items);
-                return docSnap.data().items || [];
-            } else {
-                console.log('Документ не найден.');
-                return []
-            }
-        } catch (e) {
-            console.error('Ошибка при получении корзины', e);
-        }
-    } else {
-        console.error('Пользователь не авторизован');
+  const user = auth.currentUser;
+  const userId = user ? user.uid : 'guest';
+  try {
+      const docSnap = await getDoc(doc(db, 'basket', userId));
+      if (docSnap.exists()) {
+          console.log('Данные корзины', docSnap.data().items);
+          return docSnap.data().items || [];
+      } else {
+          return [];
+      }
+  } catch (e) {
+      console.error('Ошибка при получении корзины', e);
+  }
+};
+
+const replaceGuestBasket = async (userId) => {
+  try {
+      const guestDocRef = doc(db, 'basket', 'guest');
+      const guestDocSnap = await getDoc(guestDocRef);
+      if (guestDocSnap.exists()) {
+          const guestItems = guestDocSnap.data().items || [];
+          const userDocRef = doc(db, 'basket', userId);
+          const userDocSnap = await getDoc(userDocRef);
+          if (userDocSnap.exists()) {
+              const userItems = userDocSnap.data().items || [];
+              const combinedItems = [...new Set([...userItems, ...guestItems])];
+              await setDoc(userDocRef, { items: combinedItems });
+          } else {
+              await setDoc(userDocRef, { items: guestItems });
+          }
+          await setDoc(guestDocRef, { items: [] }); 
+      }
+  } catch (e) {
+      console.error('Ошибка при переносе корзины гостя', e);
+  }
+};
+
+const addNewProduct = async (
+    image: string,
+    title: string,
+    description: string,
+    price: number
+  ) => {
+    try {
+      await addDoc(collection(db, 'pizza-card'), {
+        image,
+        title,
+        description,
+        price,
+      });
+    } catch (error) {
+      console.error('Ошибка добавления документа!', error);
+    }
+  };
+
+  const deleteProductCard = async (id: string) => {
+    try{
+        await deleteDoc(doc(db, 'pizza-card', id))
+    }
+    catch (error){
+        console.error('Ошибка удаления документа!', error);
+    }
+  }
+
+  const updateProduct = async (id: string, image: string, title: string, description: string, price) => {
+    try{
+        const productRef = doc(db, 'pizza-card', id);
+        await updateDoc(productRef, {
+            image, 
+            title,
+            description,
+            price,
+        })
+    }
+    catch(error){
+        console.error('Ошибка сохранения изменений!', error);
         
     }
-}
+  }
 
-export {auth, db, saveBasket, clearBasket, getBasket, deleteItem}
+export {auth, db, saveBasket, clearBasket, getBasket, deleteItem, replaceGuestBasket, addNewProduct, deleteProductCard, updateProduct}

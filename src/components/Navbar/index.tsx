@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './styles.scss';
-import Button from '../Button';
-import { Menu } from './SortList';
+import Button from 'components/Button';
+import { Menu } from 'components/Navbar/SortList';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
-import { Choise } from './ChoiseList';
+import { Choise } from 'components/Navbar/ChoiseList';
 
 interface NavbarProps {
   setSorting: (option: string) => void;
