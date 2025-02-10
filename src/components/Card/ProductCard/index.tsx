@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.scss';
 
 interface ProductCardProps {
   image: string;
@@ -21,7 +22,7 @@ export default function Card({
     <div className="product-card" onClick={onClick}>
       <div className="product">
         <img className="product-prewie" src={image} alt={title} />
-        <span className="product-title">{title}</span>
+        <h3 className="product-title">{title}</h3>
         <span className="product-description">{description}</span>
         <span className="product-price">от {price} руб.</span>
         {children}

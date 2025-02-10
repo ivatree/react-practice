@@ -23,7 +23,8 @@
                 cursor: pointer;
                 height: 30rem;
                 width: auto;
-                grid-template-columns: 1fr 1fr; 
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 55% 10% 10% 15% 10%; 
                 justify-content: center;
                 align-items: center;
                 &:hover .product-prewie{
@@ -68,6 +69,83 @@
                     display: flex;
                     grid-column: 1 / all;
                     justify-content: space-between;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 400px ) and (max-width: 768px){
+    .admin-container{
+        .product-container{
+            grid-template-columns: 1fr 1fr;
+            .product-card{
+                .product{
+                    height: 20rem;
+                    grid-template-rows: 40% 10% 15% 20% 15%;
+                    .product-prewie{
+                        width: 10rem;
+                        align-self: center;
+                        justify-self: center;
+                    }
+                    .product-title{
+                        font-size: $fontsm;
+                    }
+                    .product-price{
+                        font-size: $fontsm;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px ) and (max-width: 900px){
+    .admin-container{
+
+        .product-container{
+            grid-template-columns: 1fr 1fr 1fr;
+            .product-card{
+                .product{
+                    height: 20rem;
+                    grid-template-rows: 40% 10% 15% 20% 15%;
+
+                    .product-prewie{
+                        width: 10rem;
+                        align-self: center;
+                        justify-self: center;
+                    }
+                    .product-title{
+                        font-size: $fontsm;
+                    }
+                    .product-price{
+                        font-size: $fontsm;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 900px ) and (max-width: 1200px){
+    .admin-container{
+        .product-container{
+            grid-template-columns: 1fr 1fr 1fr;
+            .product-card{
+                .product{
+                    height: 25rem;
+                    grid-template-rows: 50% 10% 10% 20% 10%;
+                    .product-prewie{
+                        width: 15rem;
+                        align-self: center;
+                        justify-self: center;
+                    }
+                    .product-title{
+                        font-size: $fontmd;
+                    }
+                    .product-price{
+                        font-size: $fontmd;
+                    }
                 }
             }
         }

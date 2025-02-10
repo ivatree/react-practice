@@ -1,7 +1,7 @@
 @import '/src/styles/styles.module.scss';
 
 .menu-list{
-    z-index: 1000;
+    z-index: 998;
     position: absolute;
     top: 45%;
     right: 1%;
@@ -11,9 +11,15 @@
     padding-block: $paddingmd;
     padding-inline: $paddingmd;
     .menu-item{
+        cursor: pointer;
         list-style: none;
         height: 2.25rem;
         display: flex;
         align-items: center;
+        transition: all 0.2s;
+        &:hover{
+            color: $mainorange;
+            transition: all 0.2s;
+        }
     }
 }

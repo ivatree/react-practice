@@ -1,29 +1,16 @@
 import Button from 'components/Button';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 interface ChoiseProps {
   choiseOptions: {
-    [key: string]: { title: string; url?: () => void };
+    [key: string]: { title: string };
   };
-  selectedChoiseOption: string;
   onChoiseChange: (choiseOption: string) => void;
 }
 
 export function Choise({ choiseOptions, onChoiseChange }: ChoiseProps) {
-  const [choiseButton, setChoiseButton] = useState(() => {
-    const storedChoiseButton = localStorage.getItem('choiseButton');
-    return (
-      storedChoiseButton || (window.location.pathname === '/' ? 'Все' : null)
-    );
-  });
-
-  useEffect(() => {
-    localStorage.setItem('choiseButton', choiseButton);
-  }, [choiseButton]);
-
   const handleChoiseClick = (choiseOption: string) => {
     onChoiseChange(choiseOption);
-    setChoiseButton(choiseOption);
   };
 
   return (
@@ -31,7 +18,7 @@ export function Choise({ choiseOptions, onChoiseChange }: ChoiseProps) {
       {Object.keys(choiseOptions).map((choiseOption) => (
         <Button
           key={choiseOption}
-          className={`${choiseButton === choiseOption ? 'active' : 'choise'}`}
+          className="choise"
           text={choiseOptions[choiseOption].title}
           onClick={() => {
             handleChoiseClick(choiseOption);

@@ -106,7 +106,8 @@ const addNewProduct = async (
     image: string,
     title: string,
     description: string,
-    price: number
+    price: number,
+    category: string,
   ) => {
     try {
       await addDoc(collection(db, 'pizza-card'), {
@@ -114,6 +115,7 @@ const addNewProduct = async (
         title,
         description,
         price,
+        category,
       });
     } catch (error) {
       console.error('Ошибка добавления документа!', error);
@@ -129,7 +131,7 @@ const addNewProduct = async (
     }
   }
 
-  const updateProduct = async (id: string, image: string, title: string, description: string, price) => {
+  const updateProduct = async (id: string, image: string, title: string, description: string, price, category: string) => {
     try{
         const productRef = doc(db, 'pizza-card', id);
         await updateDoc(productRef, {
@@ -137,6 +139,7 @@ const addNewProduct = async (
             title,
             description,
             price,
+            category,
         })
     }
     catch(error){

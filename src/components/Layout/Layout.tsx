@@ -1,7 +1,6 @@
+import React from 'react';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-import Navbar from 'components/Navbar';
-import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 interface LayoutProps {
@@ -31,8 +30,6 @@ const Layout = ({
   LogOut,
   selectComponent,
 }: LayoutProps) => {
-  const [sorting, setSorting] = useState('popular');
-
   return (
     <>
       <Header
@@ -41,7 +38,6 @@ const Layout = ({
         LogOut={LogOut}
         selectComponent={selectComponent}
       />
-      <Navbar setSorting={setSorting} />
       <Outlet></Outlet>
       {children}
       <Footer />

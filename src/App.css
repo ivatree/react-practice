@@ -2,9 +2,12 @@
   text-align: center;
 }
 
-.main-container{
+.main-container, .admin-container{
   max-width: 1300px;    
   margin-inline: auto;
   padding-inline: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-self: center;
 }
 

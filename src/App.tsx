@@ -12,7 +12,8 @@ import { clearBasket, db } from 'utils/firebase';
 import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
 import AdminPage from 'pages/admin';
 import { doc, getDoc } from 'firebase/firestore';
-import CardContainer from 'components/Card/CardContainer/container';
+import CardContainer from 'components/Card/CardContainer';
+import Navbar from 'components/Navbar';
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function App() {
     id: '',
   });
   const [sorting, setSorting] = useState('popular');
-
+  const [scrollToCategory, setScrollToCategory] = useState('');
   const auth = getAuth();
 
   useEffect(() => {
@@ -95,15 +96,24 @@ function App() {
       LogOut={LogOut}
       selectComponent={selectComponent}
     >
-      <section className="main-container">
-        {location.pathname === '/Admin' ? (
+      <Navbar
+        setSorting={setSorting}
+        setScrollToCategory={setScrollToCategory}
+      />
+      {location.pathname === '/Admin' ? (
+        <section className="admin-container">
           <Routes>
             <Route path="/Admin" element={<AdminPage />} />
           </Routes>
-        ) : (
-          <CardContainer sorting={sorting} setSorting={setSorting} />
-        )}
-      </section>
+        </section>
+      ) : (
+        <section className="main-container">
+          <CardContainer
+            sorting={sorting}
+            scrollToCategory={scrollToCategory}
+          />
+        </section>
+      )}
       <Modal active={modalActive} closeModal={closeModal}>
         <Routes>
           <Route path="/SignUp" element={<SignUp />} />

@@ -9,12 +9,14 @@ interface ChangeProps {
   title: string;
   description: string;
   price: number;
+  category: string;
   handleSave: (
     id: string,
     image: string,
     title: string,
     description: string,
-    price: number
+    price: number,
+    category: string
   ) => void;
 }
 
@@ -24,12 +26,14 @@ export default function CardChange({
   title,
   description,
   price,
+  category,
   handleSave,
 }: ChangeProps) {
   const [newImage, setNewImage] = useState(image);
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
   const [newPrice, setNewPrice] = useState(price);
+  const [newCategory, setNewCategory] = useState(category);
 
   return (
     <div className="change-container">
@@ -63,12 +67,26 @@ export default function CardChange({
           handler={(e) => setNewPrice(Number(e.target.value))}
           text="Цена"
         />
+        <Input
+          title="Категория"
+          type="text"
+          value={newCategory.toString()}
+          handler={(e) => setNewCategory(e.target.value)}
+          text="spicy/veg/meat"
+        />
       </div>
       <div className="change-footer">
         <Button
-          className="addProduct"
+          className="choise"
           onClick={() =>
-            handleSave(id, newImage, newTitle, newDescription, newPrice)
+            handleSave(
+              id,
+              newImage,
+              newTitle,
+              newDescription,
+              newPrice,
+              newCategory
+            )
           }
           text="Сохранить"
         />

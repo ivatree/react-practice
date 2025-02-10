@@ -7,7 +7,8 @@ interface AddingProps {
     image: string,
     title: string,
     description: string,
-    price: number
+    price: number,
+    category: string
   ) => void;
 }
 
@@ -16,6 +17,7 @@ export default function AddProduct({ handleClick }: AddingProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
 
   return (
     <div className="change-container">
@@ -49,11 +51,20 @@ export default function AddProduct({ handleClick }: AddingProps) {
           handler={(e) => setPrice(e.target.value)}
           text="Цена"
         />
+        <Input
+          title="Категория"
+          type="text"
+          value={category.toString()}
+          handler={(e) => setCategory(e.target.value)}
+          text="spicy/veg/meat"
+        />
       </div>
       <div className="change-footer">
         <Button
-          className="addProduct"
-          onClick={() => handleClick(image, title, description, Number(price))}
+          className="choise"
+          onClick={() =>
+            handleClick(image, title, description, Number(price), category)
+          }
           text="Сохранить"
         />
       </div>
