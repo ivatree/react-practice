@@ -7,12 +7,15 @@ import { Choise } from 'components/Navbar/ChoiseList';
 
 interface NavbarProps {
   setSorting: (option: string) => void;
+  setScrollToCategory: (category: string) => void;
 }
 
-export default function Navbar({ setSorting }: NavbarProps) {
+export default function Navbar({
+  setSorting,
+  setScrollToCategory,
+}: NavbarProps) {
   const [openMenu, setOpenMenu] = useState(false);
   const [selectedOption, setSelectedOption] = useState('popular');
-  const [selectedChoiseOption, setSelectedChoiseOption] = useState('all');
   const arrow = openMenu ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />;
 
   const options = {
@@ -37,15 +40,13 @@ export default function Navbar({ setSorting }: NavbarProps) {
   };
 
   const choiceOptions = {
-    all: { title: 'Все' },
     meat: { title: 'Мясные' },
-    vegetarian: { title: 'Вегетарианские' },
-    grill: { title: 'Гриль' },
-    spisy: { title: 'Острые' },
+    spicy: { title: 'Острые' },
+    veg: { title: 'Вегетарианские' },
   };
 
   const handleChoiseChange = (choiseOption: string) => {
-    setSelectedChoiseOption(choiseOption);
+    setScrollToCategory(choiseOption);
   };
 
   return (
@@ -53,7 +54,6 @@ export default function Navbar({ setSorting }: NavbarProps) {
       <nav className="settings-container">
         <div className="choise-container">
           <Choise
-            selectedChoiseOption={selectedChoiseOption}
             choiseOptions={choiceOptions}
             onChoiseChange={handleChoiseChange}
           />

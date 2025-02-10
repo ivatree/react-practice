@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Modal } from 'components/Modal';
 import { initializeApp } from 'firebase/app';
 import {
@@ -12,9 +12,7 @@ import {
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import CardChoice from '../CardChoise';
-import Card from '../ProductCard';
-import './styles.scss';
-import Button from 'components/Button';
+import CardSection from './CardSection.tsx';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -41,18 +39,18 @@ interface Card {
   title: string;
   description: string;
   price: number;
+  category?: string[];
 }
 
 interface CardContainerProps {
   sorting: string;
-  setSorting: (option: string) => void;
+  scrollToCategory: string;
 }
 
 const fetchCards = async (sortingQuery): Promise<Card[]> => {
   if (!sortingQuery) {
     throw new Error('Invalid query');
   }
-
   const querySnapshot: QuerySnapshot<DocumentData> =
     await getDocs(sortingQuery);
   const cards: Card[] = [];
@@ -62,7 +60,10 @@ const fetchCards = async (sortingQuery): Promise<Card[]> => {
   return cards;
 };
 
-export default function CardContainer({ sorting }: CardContainerProps) {
+export default function CardContainer({
+  sorting,
+  scrollToCategory,
+}: CardContainerProps) {
   const [modalActive, setModalActive] = useState(false);
   const navigate = useNavigate();
   const [selectComponent, setSelectComponent] = useState({
@@ -71,16 +72,34 @@ export default function CardContainer({ sorting }: CardContainerProps) {
     description: '',
     price: 0,
   });
-  const [cards, setCards] = useState<Card[]>([]);
+  const [meatCards, setMeatCards] = useState<Card[]>([]);
+  const [spicyCards, setSpicyCards] = useState<Card[]>([]);
+  const [vegCards, setVegCards] = useState<Card[]>([]);
+
+  const meatRef = useRef<HTMLDivElement>(null);
+  const spicyRef = useRef<HTMLDivElement>(null);
+  const vegRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const getData = async () => {
       const sortingQuery = sortQueries[sorting];
       const data = await fetchCards(sortingQuery);
-      setCards(data);
+      setMeatCards(data.filter((card) => card.category?.includes('meat')));
+      setSpicyCards(data.filter((card) => card.category?.includes('spicy')));
+      setVegCards(data.filter((card) => card.category?.includes('veg')));
     };
     getData();
   }, [sorting]);
+
+  useEffect(() => {
+    if (scrollToCategory === 'meat') {
+      meatRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (scrollToCategory === 'spicy') {
+      spicyRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (scrollToCategory === 'veg') {
+      vegRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [scrollToCategory]);
 
   const closeModal = () => {
     setModalActive(false);
@@ -99,28 +118,31 @@ export default function CardContainer({ sorting }: CardContainerProps) {
   };
 
   return (
-    <article className="container">
-      {cards.map((card) => (
-        <Card
-          key={card.id}
-          image={card.image}
-          title={card.title}
-          description={card.description}
-          price={card.price}
-          onClick={() =>
-            openModal(card.image, card.title, card.description, card.price)
-          }
-        >
-          <Button
-            className="addProduct"
-            onClick={() => openModal}
-            text="Выбрать"
-          />
-        </Card>
-      ))}
+    <>
+      <div ref={meatRef}>
+        <CardSection
+          title="Мясные пиццы"
+          cards={meatCards}
+          openModal={openModal}
+        />
+      </div>
+      <div ref={spicyRef}>
+        <CardSection
+          title="Острые пиццы"
+          cards={spicyCards}
+          openModal={openModal}
+        />
+      </div>
+      <div ref={vegRef}>
+        <CardSection
+          title="Вегетарианские пиццы"
+          cards={vegCards}
+          openModal={openModal}
+        />
+      </div>
       <Modal active={modalActive} closeModal={closeModal}>
         <CardChoice {...selectComponent} />
       </Modal>
-    </article>
+    </>
   );
 }

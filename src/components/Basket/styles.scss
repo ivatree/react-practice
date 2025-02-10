@@ -30,9 +30,10 @@
         }
         .basket-item{
             .product{
+                height: 10rem;
                 display: grid;
                 grid-template-columns: 30% 60% 10%;
-                grid-template-rows: 15% 70% 15%;
+                grid-template-rows: 30% 40% 30%;
                 justify-content: center;
                 align-items: center;
                 box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);

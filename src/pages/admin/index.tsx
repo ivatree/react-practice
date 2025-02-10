@@ -32,6 +32,7 @@ interface Card {
   title: string;
   description: string;
   price: number;
+  category: string;
 }
 
 const fetchCards = async (): Promise<Card[]> => {
@@ -53,6 +54,7 @@ export default function AdminPage() {
     title: '',
     description: '',
     price: 0,
+    category: '',
   });
   const [cards, setCards] = useState<Card[]>([]);
 
@@ -76,6 +78,7 @@ export default function AdminPage() {
       title: '',
       description: '',
       price: 0,
+      category: '',
     });
     setIsAddingProduct(true);
     setModalActive(true);
@@ -86,9 +89,10 @@ export default function AdminPage() {
     image: string,
     title: string,
     description: string,
-    price: number
+    price: number,
+    category: string
   ) => {
-    setSelectComponent({ id, image, title, description, price });
+    setSelectComponent({ id, image, title, description, price, category });
     setIsAddingProduct(false);
     setModalActive(true);
   };
@@ -97,9 +101,10 @@ export default function AdminPage() {
     image: string,
     title: string,
     description: string,
-    price: number
+    price: number,
+    category: string
   ) => {
-    await addNewProduct(image, title, description, price);
+    await addNewProduct(image, title, description, price, category);
     const data = await fetchCards();
     setCards(data);
     closeModal();
@@ -110,9 +115,10 @@ export default function AdminPage() {
     image: string,
     title: string,
     description: string,
-    price: number
+    price: number,
+    category: string
   ) => {
-    await updateProduct(id, image, title, description, price);
+    await updateProduct(id, image, title, description, price, category);
     const data = await fetchCards();
     setCards(data);
     closeModal();
@@ -141,15 +147,7 @@ export default function AdminPage() {
             title={card.title}
             description={card.description}
             price={card.price}
-            onClick={() =>
-              openEditProductModal(
-                card.id,
-                card.image,
-                card.title,
-                card.description,
-                card.price
-              )
-            }
+            onClick={() => ''}
           >
             <div className="cardBtn-container">
               <Button
@@ -160,7 +158,8 @@ export default function AdminPage() {
                     card.image,
                     card.title,
                     card.description,
-                    card.price
+                    card.price,
+                    card.category
                   )
                 }
                 text="Изменить"
@@ -183,6 +182,7 @@ export default function AdminPage() {
               title={selectComponent.title}
               description={selectComponent.description}
               price={selectComponent.price}
+              category={selectComponent.category}
               handleSave={handleSaveProductClick}
             />
           )}
