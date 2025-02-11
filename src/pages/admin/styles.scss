@@ -1,99 +1,94 @@
 @import 'styles/styles.module.scss';
 
-.admin-container{
-    max-width: 1300px;
-    .btn-container{
-        width: 100%;
-        display: flex;
-        justify-self: center;
-        justify-content: center;
-    }
-    .product-container{
-        height: max-content;
-        justify-self: center;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-column-gap: 2rem;
-        grid-row-gap: 2rem;
-        margin-block: 2rem;
-        .product-card{
-            .product{
+
+.btn-container{
+    width: 100%;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+}
+.product-container{
+    height: max-content;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    margin-block: 2rem;
+    .product-card{
+        .product{
+            grid-row: 2;
+            display: grid;
+            cursor: pointer;
+            height: 30rem;
+            width: auto;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 55% 10% 10% 15% 10%; 
+            justify-content: center;
+            align-items: center;
+            &:hover .product-prewie{
+                transition: all 0.3s;
+                transform: translateY(5px);
+            }
+            .product-prewie{
+                grid-row: 1;
+                grid-column: 1 / all;
+                width: 18rem;
+                transition: all 0.3s;
+            }
+            .product-title{
+                font-size: $fontmd;
+                font-weight: $fontbold;
                 grid-row: 2;
-                display: grid;
-                cursor: pointer;
-                height: 30rem;
-                width: auto;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 55% 10% 10% 15% 10%; 
-                justify-content: center;
+                grid-column: 1 / all;
                 align-items: center;
-                &:hover .product-prewie{
-                    transition: all 0.3s;
-                    transform: translateY(5px);
-                }
-                .product-prewie{
-                    grid-row: 1;
-                    grid-column: 1 / all;
-                    width: 18rem;
-                    transition: all 0.3s;
-                }
-                .product-title{
-                    font-size: $fontmd;
-                    font-weight: $fontbold;
-                    grid-row: 2;
-                    grid-column: 1 / all;
-                    align-items: center;
-                }
-                .product-description{
-                    width: 100%;
-                    font-size: 0.85rem;
-                    line-height: 15px;
-                    color: #00000090;
-                    overflow-y: hidden;
-                    display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 4;
-                    line-clamp: 4;
-                    grid-row: 4;
-                    grid-column: 1 / all;
-                    
-                    align-self: baseline;
-                }
-                .product-price{
-                    grid-column:1 / all;
-                    grid-row: 3;
-                    font-size: $fontmd;
-                    font-weight: $fontbold;
-                }
-                .cardBtn-container{
-                    display: flex;
-                    grid-column: 1 / all;
-                    justify-content: space-between;
-                }
+            }
+            .product-description{
+                width: 100%;
+                font-size: 0.85rem;
+                line-height: 15px;
+                color: #00000090;
+                overflow-y: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 4;
+                line-clamp: 4;
+                grid-row: 4;
+                grid-column: 1 / all;
+                align-self: baseline;
+            }
+            .product-price{
+                grid-column:1 / all;
+                grid-row: 3;
+                font-size: $fontmd;
+                font-weight: $fontbold;
+            }
+            .cardBtn-container{
+                display: flex;
+                grid-column: 1 / all;
+                justify-content: space-between;
             }
         }
     }
 }
-
+        
 @media (min-width: 400px ) and (max-width: 768px){
-    .admin-container{
-        .product-container{
-            grid-template-columns: 1fr 1fr;
-            .product-card{
-                .product{
-                    height: 20rem;
-                    grid-template-rows: 40% 10% 15% 20% 15%;
-                    .product-prewie{
-                        width: 10rem;
-                        align-self: center;
-                        justify-self: center;
-                    }
-                    .product-title{
-                        font-size: $fontsm;
-                    }
-                    .product-price{
-                        font-size: $fontsm;
-                    }
+    .product-container{
+        grid-template-columns: 1fr 1fr;
+        .product-card{
+            .product{
+                height: 20rem;
+                grid-template-rows: 40% 10% 15% 20% 15%;
+                .product-prewie{
+                    width: 10rem;
+                    align-self: center;
+                    justify-self: center;
+                }
+                .product-title{
+                    font-size: $fontsm;
+                }
+                .product-price{
+                    font-size: $fontsm;
                 }
             }
         }
@@ -101,26 +96,22 @@
 }
 
 @media (min-width: 768px ) and (max-width: 900px){
-    .admin-container{
-
-        .product-container{
-            grid-template-columns: 1fr 1fr 1fr;
-            .product-card{
-                .product{
-                    height: 20rem;
-                    grid-template-rows: 40% 10% 15% 20% 15%;
-
-                    .product-prewie{
-                        width: 10rem;
-                        align-self: center;
-                        justify-self: center;
-                    }
-                    .product-title{
-                        font-size: $fontsm;
-                    }
-                    .product-price{
-                        font-size: $fontsm;
-                    }
+    .product-container{
+        grid-template-columns: 1fr 1fr 1fr;
+        .product-card{
+            .product{
+                height: 20rem;
+                grid-template-rows: 40% 10% 15% 20% 15%;
+                .product-prewie{
+                    width: 10rem;
+                    align-self: center;
+                    justify-self: center;
+                }
+                .product-title{
+                    font-size: $fontsm;
+                }
+                .product-price{
+                    font-size: $fontsm;
                 }
             }
         }
@@ -128,24 +119,22 @@
 }
 
 @media (min-width: 900px ) and (max-width: 1200px){
-    .admin-container{
-        .product-container{
-            grid-template-columns: 1fr 1fr 1fr;
-            .product-card{
-                .product{
-                    height: 25rem;
-                    grid-template-rows: 50% 10% 10% 20% 10%;
-                    .product-prewie{
-                        width: 15rem;
-                        align-self: center;
-                        justify-self: center;
-                    }
-                    .product-title{
-                        font-size: $fontmd;
-                    }
-                    .product-price{
-                        font-size: $fontmd;
-                    }
+    .product-container{
+        grid-template-columns: 1fr 1fr 1fr;
+        .product-card{
+            .product{
+                height: 25rem;
+                grid-template-rows: 50% 10% 10% 20% 10%;
+                .product-prewie{
+                    width: 15rem;
+                    align-self: center;
+                    justify-self: center;
+                }
+                .product-title{
+                    font-size: $fontmd;
+                }
+                .product-price{
+                    font-size: $fontmd;
                 }
             }
         }

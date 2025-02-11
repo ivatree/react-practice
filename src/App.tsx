@@ -1,25 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import React, { ReactElement, useEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Layout from 'components/Layout/Layout';
 import { useDispatch } from 'react-redux';
 import { removeUser, setUser } from 'store/slices/userSlice';
 import { Modal } from 'components/Modal';
-import { SignUp } from 'components/SignUp';
+import SignUp from 'components/SignUp';
 import { Basket } from 'components/Basket/index';
-import { Login } from 'components/Login';
 import { clearBasket, db } from 'utils/firebase';
 import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
 import AdminPage from 'pages/admin';
 import { doc, getDoc } from 'firebase/firestore';
 import CardContainer from 'components/Card/CardContainer';
 import Navbar from 'components/Navbar';
+import Button from 'components/Button';
+import { AiOutlineCaretUp } from 'react-icons/ai';
+import AboutPage from 'pages/infoPage/about';
+import { Login } from 'components/Login';
+import RulesPage from 'pages/infoPage/rules';
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
   const [modalActive, setModalActive] = useState(false);
+  const [modalContent, setModalContent] = useState<ReactElement | null>(null);
+  const [sorting, setSorting] = useState('popular');
+  const [scrollToCategory, setScrollToCategory] = useState('');
+  const auth = getAuth();
+  const [showButton, setShowButton] = useState(false);
+  const location = useLocation();
   const [selectComponent, setSelectComponent] = useState({
     image: '',
     title: '',
@@ -27,9 +35,6 @@ function App() {
     price: 0,
     id: '',
   });
-  const [sorting, setSorting] = useState('popular');
-  const [scrollToCategory, setScrollToCategory] = useState('');
-  const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -67,9 +72,13 @@ function App() {
     await clearBasket();
   };
 
-  const openRegForm = () => {
+  const openModalContent = (content: ReactElement) => {
+    setModalContent(content);
     setModalActive(true);
-    navigate('/SignUp');
+  };
+
+  const openRegForm = () => {
+    openModalContent(<SignUp openModalContent={openModalContent} />);
   };
 
   const openBasket = (
@@ -80,14 +89,36 @@ function App() {
     id: string
   ) => {
     setSelectComponent({ image, title, description, price, id });
-    setModalActive(true);
-    navigate('/Basket');
+    openModalContent(
+      <Basket isOpen={true} closeBasket={closeModal} initialItems={[]} />
+    );
   };
 
   const closeModal = () => {
-    navigate('/');
     setModalActive(false);
+    setModalContent(null);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const moveUp = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const showNavbar =
+    location.pathname === '/' || location.pathname === '/Admin';
 
   return (
     <Layout
@@ -96,40 +127,47 @@ function App() {
       LogOut={LogOut}
       selectComponent={selectComponent}
     >
-      <Navbar
-        setSorting={setSorting}
-        setScrollToCategory={setScrollToCategory}
-      />
-      {location.pathname === '/Admin' ? (
-        <section className="admin-container">
-          <Routes>
-            <Route path="/Admin" element={<AdminPage />} />
-          </Routes>
-        </section>
-      ) : (
-        <section className="main-container">
-          <CardContainer
-            sorting={sorting}
-            scrollToCategory={scrollToCategory}
-          />
-        </section>
+      {showNavbar && (
+        <Navbar
+          setSorting={setSorting}
+          setScrollToCategory={setScrollToCategory}
+        />
       )}
-      <Modal active={modalActive} closeModal={closeModal}>
+      <section className="main-container">
         <Routes>
-          <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/Login" element={<Login />} />
           <Route
-            path="/Basket"
+            path="/"
             element={
-              <Basket
-                isOpen={true}
-                closeBasket={closeModal}
-                initialItems={[]}
+              <CardContainer
+                sorting={sorting}
+                scrollToCategory={scrollToCategory}
               />
             }
-          />
+          >
+            <Route
+              path="/SignUp"
+              element={<SignUp openModalContent={openModalContent} />}
+            />
+            <Route
+              path="/Login"
+              element={<Login openModalContent={openModalContent} />}
+            />
+          </Route>
+          <Route path="/About" element={<AboutPage />} />
+          <Route path="/Admin" element={<AdminPage />} />
+          <Route path="/Rules" element={<RulesPage />} />
         </Routes>
+      </section>
+      <Modal active={modalActive} closeModal={closeModal}>
+        {modalContent}
       </Modal>
+      {showButton && (
+        <Button
+          className="moveBtn"
+          text={<AiOutlineCaretUp />}
+          onClick={moveUp}
+        />
+      )}
     </Layout>
   );
 }

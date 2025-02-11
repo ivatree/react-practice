@@ -62,11 +62,16 @@
                     color: $gray;
                 }
                 .product-price{
-                    grid-column: 2;
+                    grid-column: 2 / 3;
                     grid-row: 3;
                     font-weight: $fontbold;
+                    justify-self: end;
                 }
-                .item-delete{
+                .item-type{
+                    grid-row: 3;
+                    grid-column: 2;
+                }
+                .delete-item{
                     grid-row: 1;
                     grid-column: 3;
                     justify-self: center;
@@ -90,9 +95,13 @@
             .basket-item{
                 overflow-x: none;
                 .product{
+                    grid-template-rows: 20% 40% 20% 20%;
                     min-width: 17rem;
                     height: 10rem;
+                    align-items: center;
                     .product-prewie{
+                        grid-row: 1 / all;
+                        align-self: center;
                         width: 6rem;
                         height: 6rem;
                     }
@@ -102,6 +111,11 @@
                     .product-description{
                         width: 14rem;
                         font-size: $fontxs;
+                    }
+                    .product-price{
+                        grid-row: 4;
+                        grid-column: 2;
+                        justify-self: baseline;
                     }
                 }
             }

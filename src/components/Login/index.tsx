@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Form } from 'components/Form/RegForm';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/slices/userSlice';
@@ -8,12 +8,18 @@ import './styles.scss';
 import Button from 'components/Button';
 import { db, replaceGuestBasket } from 'utils/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import SignUp from 'components/SignUp';
 
-export function Login() {
+interface LoginProps {
+  openModalContent: (content: ReactElement) => void;
+}
+
+export function Login({ openModalContent }: LoginProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const moveToSignUp = () => {
+    openModalContent(<SignUp openModalContent={openModalContent} />);
     navigate('/SignUp');
   };
 

@@ -133,6 +133,27 @@
     }
 }
 
+.moveBtn{
+    right: 5%;
+    bottom: 10%;
+    position: fixed;
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    color: $white;
+    background-color: #FE5F1E;
+    border: none;
+    border-radius: $radius;
+    padding: $paddingmd;
+    font-size: $fontmd;
+    font-weight: $fontbold;
+    text-align: center;
+    transition: all 0.2s;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+
 @media (max-width: 500px){
     .choise, .active{
         font-size: $fontxs;
@@ -172,3 +193,4 @@
         font-size: $fontsm;
     }
 }
+

@@ -1,7 +1,6 @@
 import React from 'react';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-import { Outlet } from 'react-router-dom';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -38,7 +37,6 @@ const Layout = ({
         LogOut={LogOut}
         selectComponent={selectComponent}
       />
-      <Outlet></Outlet>
       {children}
       <Footer />
     </>

@@ -10,7 +10,6 @@ import {
   QuerySnapshot,
   DocumentData,
 } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
 import CardChoice from '../CardChoise';
 import CardSection from './CardSection.tsx';
 
@@ -65,7 +64,6 @@ export default function CardContainer({
   scrollToCategory,
 }: CardContainerProps) {
   const [modalActive, setModalActive] = useState(false);
-  const navigate = useNavigate();
   const [selectComponent, setSelectComponent] = useState({
     image: '',
     title: '',
@@ -75,7 +73,6 @@ export default function CardContainer({
   const [meatCards, setMeatCards] = useState<Card[]>([]);
   const [spicyCards, setSpicyCards] = useState<Card[]>([]);
   const [vegCards, setVegCards] = useState<Card[]>([]);
-
   const meatRef = useRef<HTMLDivElement>(null);
   const spicyRef = useRef<HTMLDivElement>(null);
   const vegRef = useRef<HTMLDivElement>(null);
@@ -103,7 +100,6 @@ export default function CardContainer({
 
   const closeModal = () => {
     setModalActive(false);
-    navigate('/');
   };
 
   const openModal = (
@@ -114,32 +110,31 @@ export default function CardContainer({
   ) => {
     setSelectComponent({ image, title, description, price });
     setModalActive(true);
-    navigate(`/product`);
   };
 
   return (
     <>
-      <div ref={meatRef}>
+      <article ref={meatRef}>
         <CardSection
           title="Мясные пиццы"
           cards={meatCards}
           openModal={openModal}
         />
-      </div>
-      <div ref={spicyRef}>
+      </article>
+      <article ref={spicyRef}>
         <CardSection
           title="Острые пиццы"
           cards={spicyCards}
           openModal={openModal}
         />
-      </div>
-      <div ref={vegRef}>
+      </article>
+      <article ref={vegRef}>
         <CardSection
           title="Вегетарианские пиццы"
           cards={vegCards}
           openModal={openModal}
         />
-      </div>
+      </article>
       <Modal active={modalActive} closeModal={closeModal}>
         <CardChoice {...selectComponent} />
       </Modal>

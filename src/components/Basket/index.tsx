@@ -18,6 +18,7 @@ interface BasketItem {
   title: string;
   description: string;
   price: number;
+  type: string;
 }
 
 interface BasketProps {
@@ -102,8 +103,9 @@ export function Basket({
                   title={item.title}
                   description={item.description}
                   price={item.price}
-                  onClick={() => console.log('')}
+                  onClick={() => ''}
                 >
+                  <span className="item-type">Тесто: {item.type}</span>
                   <div className="delete-item">
                     <Button
                       className="deleteItem"
