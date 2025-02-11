@@ -24,7 +24,7 @@ export default function Card({
         <img className="product-prewie" src={image} alt={title} />
         <h3 className="product-title">{title}</h3>
         <span className="product-description">{description}</span>
-        <span className="product-price">от {price} руб.</span>
+        <span className="product-price">от {price.toFixed(2)} руб.</span>
         {children}
       </div>
     </div>

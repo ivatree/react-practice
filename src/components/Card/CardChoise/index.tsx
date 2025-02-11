@@ -12,6 +12,15 @@ interface BasketProps {
 
 export default function CardChoice({ ...props }: BasketProps) {
   const [basketItem, setBasketItem] = useState([]);
+  const [selectedSize, setSelectedSize] = useState('25 см');
+  const [currentPrice, setCurrentPrice] = useState(props.price);
+  const [selectedType, setSelectedType] = useState('Классика');
+
+  const sizePrices = {
+    '25 см': props.price,
+    '30 см': props.price + 5,
+    '35 см': props.price + 10,
+  };
 
   useEffect(() => {
     const fetchBasket = async () => {
@@ -21,9 +30,21 @@ export default function CardChoice({ ...props }: BasketProps) {
     fetchBasket();
   }, []);
 
+  useEffect(() => {
+    setCurrentPrice(sizePrices[selectedSize]);
+  }, [selectedSize]);
+
   const addToBasket = async () => {
     if (props) {
-      const newItem = [...basketItem, props];
+      const newItem = [
+        ...basketItem,
+        {
+          ...props,
+          size: selectedSize,
+          price: currentPrice,
+          type: selectedType,
+        },
+      ];
       setBasketItem(newItem);
       console.log('Данные корзины сохранены', newItem);
       await saveBasket(newItem);
@@ -39,15 +60,33 @@ export default function CardChoice({ ...props }: BasketProps) {
         <div className="card-settings">
           <div className="size-input">
             <label>
-              <input type="radio" name="value-radio" value="value-1" />
+              <input
+                type="radio"
+                name="value-radio"
+                value="25 см"
+                checked={selectedSize === '25 см'}
+                onChange={(e) => setSelectedSize(e.target.value)}
+              />
               <span>25 см</span>
             </label>
             <label>
-              <input type="radio" name="value-radio" value="value-2" />
+              <input
+                type="radio"
+                name="value-radio"
+                value="30 см"
+                checked={selectedSize === '30 см'}
+                onChange={(e) => setSelectedSize(e.target.value)}
+              />
               <span>30 см</span>
             </label>
             <label>
-              <input type="radio" name="value-radio" value="value-3" />
+              <input
+                type="radio"
+                name="value-radio"
+                value="35 см"
+                checked={selectedSize === '35 см'}
+                onChange={(e) => setSelectedSize(e.target.value)}
+              />
               <span>35 см</span>
             </label>
             <span className="selection"></span>
@@ -57,8 +96,10 @@ export default function CardChoice({ ...props }: BasketProps) {
               <input
                 className="type-input"
                 type="radio"
-                name="value-radio"
-                value="value-4"
+                name="type-radio"
+                value="Классика"
+                checked={selectedType === 'Классика'}
+                onChange={(e) => setSelectedType(e.target.value)}
               />
               <span>Классика</span>
             </label>
@@ -66,8 +107,10 @@ export default function CardChoice({ ...props }: BasketProps) {
               <input
                 className="type-input"
                 type="radio"
-                name="value-radio"
-                value="value-5"
+                name="type-radio"
+                value="Тонкое"
+                checked={selectedType === 'Тонкое'}
+                onChange={(e) => setSelectedType(e.target.value)}
               />
               <span>Тонкое</span>
             </label>
@@ -79,7 +122,7 @@ export default function CardChoice({ ...props }: BasketProps) {
         <Button
           className="addProduct"
           onClick={addToBasket}
-          text={`В корзину ${props.price} руб.`}
+          text={`В корзину ${currentPrice.toFixed(2)} руб.`}
         />
       </div>
     </div>

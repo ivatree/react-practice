@@ -31,46 +31,39 @@ footer{
     }
     .footer-body{
         display: grid;
-        grid-template-columns: 20rem 20rem;
         grid-row: 2;
         justify-content: center;
-        align-items: center;
         margin-bottom: 2rem;
-        .footer-infobase{
-            display: flex;
-            color: $lightgray;
-            grid-column: 2;
-            transition: all 0.2s;
-            justify-self: center;
-            text-decoration: none;
-            &:hover{
-                color: $mainorange;
-                transition: all 0.2s;
+        .info-container, .contact-containe{
+            display: grid;
+            grid-column: 1;
+            text-align: center;
+            a, p{
+                color: $lightgray;
+                text-decoration: none;
+                line-height: 0;
+                transition: all 0.1s;
+                &:hover{
+                    transition: all 0.1s;
+                    color: $mainorange;
+                }
             }
         }
-        .pay-info{
-            display: flex;
-            grid-column: 1;
-            justify-self: center;
+        .contact-container{
+            grid-column: 2;
+            text-align: center;
         }
-        .pay-icon{
-            grid-column: 1 / 3;
-            width: 40rem;
-        }
-    }
-}
-
-
-@media (min-width: 100px ) and (max-width: 300px){
-    footer{
-        width: 200px;
-        .footer-head{
-            width: 100vw;
-        }
-        .footer-body{
-            width: 100vw;
+        .pay-container{
+            margin-top: 2rem;
+            grid-column: 1/3;
+            .pay-info{
+                display: flex;
+                justify-self: center;
+            }
             .pay-icon{
-                display: none;
+                img{
+                    width: 40rem;
+                }
             }
         }
     }
@@ -78,26 +71,16 @@ footer{
 
 @media (min-width: 400px ) and (max-width: 768px){
     footer{
-        width: auto;
-        max-width: 768px;
-        .footer-head{
-            width: auto;
-            max-width: 768px;
-        }
         .footer-body{
-            width: auto;
-            grid-template-columns: auto;
-            max-width: 768px;
-            .pay-info{
-                grid-column: 1;
-                grid-row: 2;
-            }
-            .footer-infobase{
-                grid-column: 1;
-                grid-row: 1;
-            }
-            .pay-icon{
-                width: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .pay-container{
+                .pay-icon{
+                    img{
+                        width: 100%;
+                    }
+                }
             }
         }
     }

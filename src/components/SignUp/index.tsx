@@ -1,17 +1,23 @@
 import { useDispatch } from 'react-redux';
 import { setUser } from 'store/slices/userSlice';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Form } from '../Form/RegForm';
 import './styles.scss';
 import Button from 'components/Button';
 import { useNavigate } from 'react-router-dom';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
-export function SignUp() {
+import { Login } from 'components/Login';
+
+interface SignUpProps {
+  openModalContent: (content: ReactElement) => void;
+}
+export default function SignUp({ openModalContent }: SignUpProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const moveToLogin = () => {
+    openModalContent(<Login openModalContent={openModalContent} />);
     navigate('/Login');
   };
 

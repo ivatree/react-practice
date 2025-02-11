@@ -44,7 +44,9 @@ const CardSection: React.FC<CardSectionProps> = ({
           >
             <Button
               className="addProduct"
-              onClick={() => openModal}
+              onClick={() =>
+                openModal(card.image, card.title, card.description, card.price)
+              }
               text="Выбрать"
             />
           </Card>
