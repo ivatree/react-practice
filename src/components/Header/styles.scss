@@ -6,6 +6,7 @@ header{
     border-bottom: $lBorder;
     display: flex;
     justify-content: center;
+    margin-bottom: 2rem;
     .headerContainer{
         margin-inline: 1.5rem;
         width: $mWidth;
@@ -17,7 +18,7 @@ header{
             color: $black;
             text-decoration: none;
             display: grid;
-            grid-template-columns: 15% 85%;
+            grid-template-columns: 20% 80%;
             grid-column-gap: 0.5rem;
             grid-template-rows: 70% 30%;
             justify-self: center;
@@ -25,7 +26,7 @@ header{
             &:hover{
                 .logo{
                     transition: all 0.2s;
-                    transform: rotate(-45deg);
+                    transform: rotateZ(-45deg) translateY(15px);
                 }
             }
             .logo{
@@ -34,7 +35,6 @@ header{
                 grid-row: 1 / all;
                 width: 4rem;
                 height: 4rem;
-                justify-self: center;
             }
             .title{
                 grid-column: 2;
@@ -58,7 +58,28 @@ header{
     }
 }
 
-@media (min-width: 400px) and (max-width: 768px){
+@media (min-width: 400px) and (max-width: 500px){
+    header{
+        .headerContainer{
+            .containerForLogo{
+                .logo{
+                    width: 3rem;
+                    height: 3rem;
+                    margin-right: 10px;
+                }
+                .title{
+                    font-size: $fontmd;
+                    transform: translateY(10px);
+                }
+                .description{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 500px) and (max-width: 768px){
     header{
         .headerContainer{
             .containerForLogo{
@@ -70,10 +91,9 @@ header{
                     font-size: $fontmd;
                 }
                 .description{
-                    font-size: $fontxs
+                    font-size: $fontsm;
                 }
             }
         }
     }
 }
-@media (min-width: 768px) and (max-width: 900px){}

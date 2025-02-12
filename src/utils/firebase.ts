@@ -38,7 +38,6 @@ const clearBasket = async () => {
               items: deleteField()
           });
       } else {
-          console.log('Документ не найден. Создание нового документа.');
           await setDoc(docRef, { items: [] });
       }
   } catch (e) {
@@ -70,7 +69,6 @@ const getBasket = async () => {
   try {
       const docSnap = await getDoc(doc(db, 'basket', userId));
       if (docSnap.exists()) {
-          console.log('Данные корзины', docSnap.data().items);
           return docSnap.data().items || [];
       } else {
           return [];

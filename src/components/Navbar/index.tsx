@@ -40,6 +40,7 @@ export default function Navbar({
   };
 
   const choiceOptions = {
+    mega: { title: 'Сытные' },
     meat: { title: 'Мясные' },
     spicy: { title: 'Острые' },
     veg: { title: 'Вегетарианские' },

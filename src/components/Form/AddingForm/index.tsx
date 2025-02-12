@@ -56,7 +56,7 @@ export default function AddProduct({ handleClick }: AddingProps) {
           type="text"
           value={category.toString()}
           handler={(e) => setCategory(e.target.value)}
-          text="spicy/veg/meat"
+          text="spicy | veg | meat | mega"
         />
       </div>
       <div className="change-footer">

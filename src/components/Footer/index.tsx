@@ -16,7 +16,7 @@ export default function Footer() {
             <a href="/Rules">Условия использования</a>
           </p>
           <p>
-            <a href="#">Политика конфиденциальностия</a>
+            <a href="/Politics">Политика конфиденциальностия</a>
           </p>
           <p>
             <a href="/About">О нас</a>
@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="contact-container">
           <h4>Связь с нами:</h4>
           <p className="footer-number">Звонок по телефону: 2025</p>
-          <p className="footer-email">Email: react-pizza@gmail.com</p>
+          <p className="footer-email">Почта: react-pizza@gmail.com</p>
         </div>
         <div className="pay-container">
           <span className="pay-info">Принимаем к оплате</span>

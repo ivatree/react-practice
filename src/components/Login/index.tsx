@@ -44,7 +44,6 @@ export function Login({ openModalContent }: LoginProps) {
             console.error('Документ пользователя не существует');
           }
         });
-        console.log(user);
       })
       .catch((error) => {
         console.error(error);

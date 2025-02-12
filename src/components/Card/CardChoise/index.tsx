@@ -18,8 +18,8 @@ export default function CardChoice({ ...props }: BasketProps) {
 
   const sizePrices = {
     '25 см': props.price,
-    '30 см': props.price + 5,
-    '35 см': props.price + 10,
+    '30 см': props.price + 7,
+    '35 см': props.price + 12,
   };
 
   useEffect(() => {
@@ -46,7 +46,6 @@ export default function CardChoice({ ...props }: BasketProps) {
         },
       ];
       setBasketItem(newItem);
-      console.log('Данные корзины сохранены', newItem);
       await saveBasket(newItem);
     }
   };
