@@ -1,6 +1,14 @@
+@import 'styles/styles.module.scss';
+
 .about-container{
-    margin-block: 2rem;
     h2{
         margin-block: 2rem;
+    }
+    .about-description{
+        font-size: $fontmd;
+    }
+    li::marker{
+        font-size: $fontmd;
+        font-weight: $fontbold;
     }
 }

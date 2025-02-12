@@ -14,7 +14,7 @@ export default function AboutPage() {
         мастера своего дела, которые используют только свежие ингредиенты и
         авторские рецепты, чтобы каждая пицца была идеальной.
       </span>
-      <ul>
+      <ol>
         <h2 className="about-title">Почему выбирают нас?</h2>
         <li>
           <h3>Качество ингредиентов:</h3>
@@ -45,7 +45,7 @@ export default function AboutPage() {
             близких.
           </span>
         </li>
-      </ul>
+      </ol>
       <h2 className="about-title">Наша миссия</h2>
       <span className="about-description">
         Cделать так, чтобы каждый кусочек пиццы приносил вам радость и

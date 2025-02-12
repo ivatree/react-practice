@@ -72,7 +72,7 @@ export default function CardChange({
           type="text"
           value={newCategory.toString()}
           handler={(e) => setNewCategory(e.target.value)}
-          text="spicy/veg/meat"
+          text="spicy | veg | meat | mega"
         />
       </div>
       <div className="change-footer">

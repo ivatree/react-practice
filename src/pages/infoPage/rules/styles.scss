@@ -1,0 +1,12 @@
+@import 'styles/styles.module.scss';
+
+article{
+    h3{
+        font-size: $fontmd;
+        margin-bottom: 2rem;
+    }
+    .text{
+        font-size: $fontmd;
+        list-style: disc;
+    }
+}

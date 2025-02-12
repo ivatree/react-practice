@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import Layout from 'components/Layout/Layout';
 import { useDispatch } from 'react-redux';
@@ -18,6 +18,7 @@ import { AiOutlineCaretUp } from 'react-icons/ai';
 import AboutPage from 'pages/infoPage/about';
 import { Login } from 'components/Login';
 import RulesPage from 'pages/infoPage/rules';
+import PoliticsPage from 'pages/infoPage/polit';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
   const auth = getAuth();
   const [showButton, setShowButton] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const [selectComponent, setSelectComponent] = useState({
     image: '',
     title: '',
@@ -65,6 +67,7 @@ function App() {
     signOut(auth)
       .then(() => {
         dispatch(removeUser());
+        navigate('/');
       })
       .catch((error) => {
         console.error('Ошибка при выходе!', error);
@@ -118,7 +121,9 @@ function App() {
   };
 
   const showNavbar =
-    location.pathname === '/' || location.pathname === '/Admin';
+    location.pathname === '/' ||
+    location.pathname === '/Login' ||
+    location.pathname === '/SignUp';
 
   return (
     <Layout
@@ -156,6 +161,7 @@ function App() {
           <Route path="/About" element={<AboutPage />} />
           <Route path="/Admin" element={<AdminPage />} />
           <Route path="/Rules" element={<RulesPage />} />
+          <Route path="/Politics" element={<PoliticsPage />} />
         </Routes>
       </section>
       <Modal active={modalActive} closeModal={closeModal}>

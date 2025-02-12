@@ -70,9 +70,11 @@ export default function CardContainer({
     description: '',
     price: 0,
   });
+  const [megaCards, setMegaCards] = useState<Card[]>([]);
   const [meatCards, setMeatCards] = useState<Card[]>([]);
   const [spicyCards, setSpicyCards] = useState<Card[]>([]);
   const [vegCards, setVegCards] = useState<Card[]>([]);
+  const megaRef = useRef<HTMLDivElement>(null);
   const meatRef = useRef<HTMLDivElement>(null);
   const spicyRef = useRef<HTMLDivElement>(null);
   const vegRef = useRef<HTMLDivElement>(null);
@@ -81,6 +83,7 @@ export default function CardContainer({
     const getData = async () => {
       const sortingQuery = sortQueries[sorting];
       const data = await fetchCards(sortingQuery);
+      setMegaCards(data.filter((card) => card.category?.includes('mega')));
       setMeatCards(data.filter((card) => card.category?.includes('meat')));
       setSpicyCards(data.filter((card) => card.category?.includes('spicy')));
       setVegCards(data.filter((card) => card.category?.includes('veg')));
@@ -95,6 +98,8 @@ export default function CardContainer({
       spicyRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else if (scrollToCategory === 'veg') {
       vegRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (scrollToCategory === 'mega') {
+      megaRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [scrollToCategory]);
 
@@ -114,6 +119,13 @@ export default function CardContainer({
 
   return (
     <>
+      <article ref={megaRef}>
+        <CardSection
+          title="Сытные пиццы"
+          cards={megaCards}
+          openModal={openModal}
+        />
+      </article>
       <article ref={meatRef}>
         <CardSection
           title="Мясные пиццы"

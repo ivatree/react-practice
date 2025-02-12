@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import store, { RootState } from 'store';
+import { RootState } from 'store';
 import { getBasket, clearBasket, deleteItem } from 'utils/firebase';
 import { AiOutlineClose } from 'react-icons/ai';
 import Card from 'components/Card/ProductCard';
@@ -46,7 +46,6 @@ export function Basket({
         } else {
           setBasketItems([]);
         }
-        console.log(store.getState());
       };
       fetchBasket();
     }
