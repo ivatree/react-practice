@@ -15,18 +15,21 @@ header{
         align-items: center;
         justify-content: space-between;
         .containerForLogo{
+            height: 4rem;
+            max-width: 21rem;
+            width: 100%;
             color: $black;
             text-decoration: none;
             display: grid;
             grid-template-columns: 20% 80%;
             grid-column-gap: 0.5rem;
-            grid-template-rows: 70% 30%;
+            grid-template-rows: 50% 50%;
             justify-self: center;
             align-items: center;
             &:hover{
                 .logo{
-                    transition: all 0.2s;
-                    transform: rotateZ(-45deg) translateY(15px);
+                    transition: all 0.4s;
+                    transform: rotateZ(-15deg)
                 }
             }
             .logo{
@@ -41,12 +44,12 @@ header{
                 font-size: 2rem;
                 font-weight: $fontbold;
                 letter-spacing: 0.1rem;
-                align-self: center;
             }
             .description{
+                width: 100%;
                 grid-column: 2;
                 font-weight: $fontlight;
-                align-self: center;
+                align-self: flex-end;
                 color: #00000090;
             }
         }
@@ -58,18 +61,18 @@ header{
     }
 }
 
-@media (min-width: 400px) and (max-width: 500px){
+@media (max-width: 500px){
     header{
         .headerContainer{
             .containerForLogo{
                 .logo{
                     width: 3rem;
                     height: 3rem;
-                    margin-right: 10px;
                 }
                 .title{
+                    margin-left: 10%;
                     font-size: $fontmd;
-                    transform: translateY(10px);
+                    transform: translateY(1rem);
                 }
                 .description{
                     display: none;
@@ -92,6 +95,7 @@ header{
                 }
                 .description{
                     font-size: $fontsm;
+                    line-height: 1.1rem;
                 }
             }
         }

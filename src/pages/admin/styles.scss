@@ -71,6 +71,30 @@
     }
 }
         
+@media (max-width: 400px ){
+    .product-container{
+        grid-template-columns: 1fr;
+        .product-card{
+            .product{
+                align-items: center;
+                height: 20rem;
+                grid-template-rows: 50% 5% 10% 25% 10%; 
+                .product-prewie{
+                    width: 10rem;
+                    align-self: center;
+                    justify-self: center;
+                }
+                .product-title{
+                    font-size: $fontsm;
+                }
+                .product-price{
+                    font-size: $fontsm;
+                }
+            }
+        }
+    }
+}
+
 @media (min-width: 400px ) and (max-width: 768px){
     .product-container{
         grid-template-columns: 1fr 1fr;

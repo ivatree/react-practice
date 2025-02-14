@@ -12,7 +12,7 @@ interface BasketProps {
 
 export default function CardChoice({ ...props }: BasketProps) {
   const [basketItem, setBasketItem] = useState([]);
-  const [selectedSize, setSelectedSize] = useState('25 см');
+  const [selectedSize, setSelectedSize] = useState('30 см');
   const [currentPrice, setCurrentPrice] = useState(props.price);
   const [selectedType, setSelectedType] = useState('Классика');
 
@@ -41,7 +41,7 @@ export default function CardChoice({ ...props }: BasketProps) {
         {
           ...props,
           size: selectedSize,
-          price: currentPrice,
+          price: parseFloat(currentPrice.toFixed(2)),
           type: selectedType,
         },
       ];

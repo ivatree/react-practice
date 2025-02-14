@@ -12,6 +12,13 @@
 
 }
 
+@media (max-width: 400px ){
+    .type-section{
+        width: 80%;
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (min-width: 400px ) and (max-width: 768px){
     .type-section{
         width: 100%;

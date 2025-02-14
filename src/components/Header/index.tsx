@@ -38,7 +38,7 @@ export default function Header({
       <div className="headerContainer">
         <a href="/" className="containerForLogo">
           <img className="logo" src={pizzalogo} alt="Logo" />
-          <span className="title">REACT PIZZA</span>
+          <h1 className="title">REACT PIZZA</h1>
           <span className="description">самая вкусная пицца во вселенной</span>
         </a>
         <div className="containerForBtn">
