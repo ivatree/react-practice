@@ -17,3 +17,12 @@
         justify-self: center;
     }
 }
+
+@media (max-width: 500px) and (max-height:1000px){
+    .change-body{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        grid-row-gap: 0rem;
+    }
+}

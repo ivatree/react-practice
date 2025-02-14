@@ -32,8 +32,32 @@
         }
     }
 }
+@media (max-width: 400px){
+    .settings-container{
+        display: flex;
+        justify-content: end;
+        .choise-container{
+            display: none;
+        }
+        .sort-settings{
 
-@media (max-width: 530px){
+            .selected-text{
+                display: none;
+            }
+            .selected-option{
+                display: none;
+
+            }
+            .selected-arrow{
+                width: 100%;
+                height: 100%;
+                font-size: $fontsm;
+            }
+        }
+    }
+}
+
+@media (max-width: 640px){
     .settings-container{
         .sort-settings{
             .selected-text{
@@ -47,6 +71,9 @@
                 width: 100%;
                 height: 100%;
                 font-size: $fontmd;
+            }
+            .choise-container{
+                gap: 0.5rem;
             }
         }
     }

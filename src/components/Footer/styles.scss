@@ -21,6 +21,7 @@ footer{
             grid-row: 1;
             width: 5rem;
             height: 5rem;
+            opacity: 0.9;
         }
         .footer-logo{
             font-size: $fontlg;
@@ -63,6 +64,26 @@ footer{
             .pay-icon{
                 img{
                     width: 40rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 400px ){
+    footer{
+        .footer-body{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .pay-container{
+                .pay-info{
+                    display: none;
+                }
+                .pay-icon{
+                    img{
+                        display: none;
+                    }
                 }
             }
         }

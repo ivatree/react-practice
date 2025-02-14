@@ -155,11 +155,7 @@
 
 
 @media (max-width: 500px){
-    .choise, .active{
-        font-size: $fontxs;
-        padding: $paddingsm;
-    }
-    .addProduct,  .regBtn{
+    .addProduct,  .regBtn, .choise, .active{
         font-size: $fontxs;
         padding: $paddingmd;
     }
@@ -171,14 +167,12 @@
 }
 
 @media (min-width: 500px) and (max-width: 768px){
-    .addProduct,  .regBtn{
+    .addProduct,  .regBtn,  .choise, .active{
         font-size: $fontsm;
         padding: $paddingmd;
     }
-    .choise, .active{
-        font-size: $fontxs;
-        padding: $paddingsm;
-    }
+    .choise, .active
+
     .openSort{
         font-size: $fontxs;
     }

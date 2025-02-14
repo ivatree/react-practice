@@ -66,9 +66,11 @@ export default function Navbar({
             text={
               <>
                 <span className="selected-arrow">{arrow}</span>
-                <span className="selected-text">Сортировка по:</span>
-                <span className="selected-option">
-                  {options[selectedOption].title}
+                <span className="selected-text">
+                  Сортировка по:&nbsp;
+                  <span className="selected-option">
+                    {options[selectedOption].title}
+                  </span>
                 </span>
               </>
             }

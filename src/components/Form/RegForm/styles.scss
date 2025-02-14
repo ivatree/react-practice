@@ -5,30 +5,6 @@
     grid-template-rows: auto auto 30%;
     width: 100%;
     margin-left: $paddingmd;
-    .input-outline{
-        background-color: #00000005;
-        display: flex;
-        border-radius: $radius;
-        height: 3rem;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
-        &:focus-within{
-            background-color: #00000010;
-            transition: all 0.2s;
-        }
-        input{
-            border: none;
-            background-color: transparent;
-            width: 80%;
-            font-size: 1rem;
-            &:focus{
-                outline: 0;
-                outline-offset: 0;     
-            }
-        }
-    }
     .btn-container{
         display: flex;
         justify-content: center;

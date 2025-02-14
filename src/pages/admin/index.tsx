@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'components/Modal';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import {
+  getFirestore,
+  getDocs,
+  collection,
+  query,
+  orderBy,
+} from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import Card from 'components/Card/ProductCard';
 import './styles.scss';
@@ -25,6 +31,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const productsRef = collection(db, 'pizza-card');
+const sortedCol = query(productsRef, orderBy('title'));
 
 interface Card {
   id: string;
@@ -36,7 +44,7 @@ interface Card {
 }
 
 const fetchCards = async (): Promise<Card[]> => {
-  const querySnapshot = await getDocs(collection(db, 'pizza-card'));
+  const querySnapshot = await getDocs(sortedCol);
   const cards: Card[] = [];
   querySnapshot.forEach((doc) => {
     cards.push({ id: doc.id, ...(doc.data() as Card) });
