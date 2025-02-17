@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from 'components/Modal';
 import { initializeApp } from 'firebase/app';
 import {
@@ -10,8 +10,8 @@ import {
   QuerySnapshot,
   DocumentData,
 } from 'firebase/firestore';
-import CardChoice from '../CardChoise';
 import CardSection from './CardSection.tsx';
+import CardChoice from '../CardChoise';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -26,11 +26,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const productsRef = collection(db, 'pizza-card');
 
-const sortQueries = {
+const createSortQueries = (isAscending: boolean) => ({
   popular: productsRef,
-  price: query(productsRef, orderBy('price')),
-  title: query(productsRef, orderBy('title')),
-};
+  price: query(productsRef, orderBy('price', isAscending ? 'asc' : 'desc')),
+  title: query(productsRef, orderBy('title', isAscending ? 'asc' : 'desc')),
+});
 
 interface Card {
   id: string;
@@ -44,14 +44,14 @@ interface Card {
 interface CardContainerProps {
   sorting: string;
   scrollToCategory: string;
+  isAscending: boolean;
+  catName: string;
 }
 
-const fetchCards = async (sortingQuery): Promise<Card[]> => {
-  if (!sortingQuery) {
-    throw new Error('Invalid query');
-  }
-  const querySnapshot: QuerySnapshot<DocumentData> =
-    await getDocs(sortingQuery);
+const fetchCards = async (sortingQuery?: any): Promise<Card[]> => {
+  const querySnapshot: QuerySnapshot<DocumentData> = sortingQuery
+    ? await getDocs(sortingQuery)
+    : await getDocs(productsRef);
   const cards: Card[] = [];
   querySnapshot.forEach((doc) => {
     cards.push({ id: doc.id, ...(doc.data() as Card) });
@@ -62,6 +62,8 @@ const fetchCards = async (sortingQuery): Promise<Card[]> => {
 export default function CardContainer({
   sorting,
   scrollToCategory,
+  isAscending = true,
+  catName,
 }: CardContainerProps) {
   const [modalActive, setModalActive] = useState(false);
   const [selectComponent, setSelectComponent] = useState({
@@ -70,38 +72,36 @@ export default function CardContainer({
     description: '',
     price: 0,
   });
-  const [megaCards, setMegaCards] = useState<Card[]>([]);
-  const [meatCards, setMeatCards] = useState<Card[]>([]);
-  const [spicyCards, setSpicyCards] = useState<Card[]>([]);
-  const [vegCards, setVegCards] = useState<Card[]>([]);
-  const megaRef = useRef<HTMLDivElement>(null);
-  const meatRef = useRef<HTMLDivElement>(null);
-  const spicyRef = useRef<HTMLDivElement>(null);
-  const vegRef = useRef<HTMLDivElement>(null);
+  const [allCards, setAllCards] = useState<Card[]>([]);
+  const [filteredCards, setFilteredCards] = useState<Card[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      const sortingQuery = sortQueries[sorting];
-      const data = await fetchCards(sortingQuery);
-      setMegaCards(data.filter((card) => card.category?.includes('mega')));
-      setMeatCards(data.filter((card) => card.category?.includes('meat')));
-      setSpicyCards(data.filter((card) => card.category?.includes('spicy')));
-      setVegCards(data.filter((card) => card.category?.includes('veg')));
+      const data = await fetchCards();
+      setAllCards(data);
+      setFilteredCards(data);
     };
     getData();
-  }, [sorting]);
+  }, []);
 
   useEffect(() => {
-    if (scrollToCategory === 'meat') {
-      meatRef.current?.scrollIntoView({ behavior: 'smooth' });
-    } else if (scrollToCategory === 'spicy') {
-      spicyRef.current?.scrollIntoView({ behavior: 'smooth' });
-    } else if (scrollToCategory === 'veg') {
-      vegRef.current?.scrollIntoView({ behavior: 'smooth' });
-    } else if (scrollToCategory === 'mega') {
-      megaRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const getData = async () => {
+      const sortingQuery = createSortQueries(isAscending)[sorting];
+      const data = await fetchCards(sortingQuery);
+      setAllCards(data);
+    };
+    getData();
+  }, [sorting, isAscending]);
+
+  useEffect(() => {
+    if (scrollToCategory === 'all') {
+      setFilteredCards(allCards);
+    } else {
+      setFilteredCards(
+        allCards.filter((card) => card.category?.includes(scrollToCategory))
+      );
     }
-  }, [scrollToCategory]);
+  }, [scrollToCategory, allCards]);
 
   const closeModal = () => {
     setModalActive(false);
@@ -119,34 +119,13 @@ export default function CardContainer({
 
   return (
     <>
-      <article ref={megaRef}>
+      <div>
         <CardSection
-          title="Сытные пиццы"
-          cards={megaCards}
+          title={catName}
+          cards={filteredCards}
           openModal={openModal}
         />
-      </article>
-      <article ref={meatRef}>
-        <CardSection
-          title="Мясные пиццы"
-          cards={meatCards}
-          openModal={openModal}
-        />
-      </article>
-      <article ref={spicyRef}>
-        <CardSection
-          title="Острые пиццы"
-          cards={spicyCards}
-          openModal={openModal}
-        />
-      </article>
-      <article ref={vegRef}>
-        <CardSection
-          title="Вегетарианские пиццы"
-          cards={vegCards}
-          openModal={openModal}
-        />
-      </article>
+      </div>
       <Modal active={modalActive} closeModal={closeModal}>
         <CardChoice {...selectComponent} />
       </Modal>

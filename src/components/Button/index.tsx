@@ -6,6 +6,7 @@ interface ButtonProps {
   onClick: () => void;
   text: any;
   children?: React.ReactNode;
+  type?: string;
 }
 
 export default function Button({

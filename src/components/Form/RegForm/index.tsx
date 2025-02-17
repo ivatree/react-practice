@@ -13,7 +13,7 @@ export function Form({ title, handleClick }: FormProps) {
   const [pass, setPass] = useState('');
 
   return (
-    <div className="form-container">
+    <form className="form-container" action={() => handleClick(email, pass)}>
       <Input
         title="Email"
         type="email"
@@ -31,10 +31,11 @@ export function Form({ title, handleClick }: FormProps) {
       <div className="btn-container">
         <Button
           className="choise"
-          onClick={() => handleClick(email, pass)}
+          onClick={() => ''}
           text={title}
+          type="submit"
         />
       </div>
-    </div>
+    </form>
   );
 }

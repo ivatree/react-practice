@@ -22,10 +22,12 @@ import PoliticsPage from 'pages/infoPage/polit';
 
 function App() {
   const dispatch = useDispatch();
+  const [isAscending, setIsAscending] = useState(true);
   const [modalActive, setModalActive] = useState(false);
   const [modalContent, setModalContent] = useState<ReactElement | null>(null);
   const [sorting, setSorting] = useState('popular');
-  const [scrollToCategory, setScrollToCategory] = useState('');
+  const [catName, setCatName] = useState('Все');
+  const [scrollToCategory, setScrollToCategory] = useState('all');
   const auth = getAuth();
   const [showButton, setShowButton] = useState(false);
   const location = useLocation();
@@ -81,7 +83,7 @@ function App() {
   };
 
   const openRegForm = () => {
-    openModalContent(<SignUp openModalContent={openModalContent} />);
+    openModalContent(<Login openModalContent={openModalContent} />);
   };
 
   const openBasket = (
@@ -134,8 +136,11 @@ function App() {
     >
       {showNavbar && (
         <Navbar
+          setCatName={setCatName}
           setSorting={setSorting}
           setScrollToCategory={setScrollToCategory}
+          setIsAscending={setIsAscending}
+          isAscending={isAscending}
         />
       )}
       <section className="main-container">
@@ -144,8 +149,10 @@ function App() {
             path="/"
             element={
               <CardContainer
+                catName={catName}
                 sorting={sorting}
                 scrollToCategory={scrollToCategory}
+                isAscending={isAscending}
               />
             }
           >

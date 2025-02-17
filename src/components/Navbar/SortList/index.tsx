@@ -7,13 +7,10 @@ interface MenuProps {
   };
   selectedOption: string;
   onOptionChange: (option: string) => void;
+  toggleSortOrder: () => void;
 }
 
-export function Menu({ options, onOptionChange }: MenuProps) {
-  const handleOptionClick = (option: string) => {
-    onOptionChange(option);
-  };
-
+export function Menu({ options, onOptionChange, toggleSortOrder }: MenuProps) {
   return (
     <div className="menu">
       <ul className="menu-list">
@@ -22,7 +19,8 @@ export function Menu({ options, onOptionChange }: MenuProps) {
             key={option}
             className="menu-item"
             onClick={() => {
-              handleOptionClick(option);
+              onOptionChange(option);
+              toggleSortOrder();
             }}
           >
             {options[option].title}

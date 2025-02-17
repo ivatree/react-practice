@@ -8,16 +8,22 @@ import { Choise } from 'components/Navbar/ChoiseList';
 interface NavbarProps {
   setSorting: (option: string) => void;
   setScrollToCategory: (category: string) => void;
+  setIsAscending: (isAscending: boolean) => void;
+  isAscending: boolean;
+  setCatName: (choiceOptions: string) => void;
 }
 
 export default function Navbar({
   setSorting,
   setScrollToCategory,
+  setIsAscending,
+  isAscending,
+  setCatName,
 }: NavbarProps) {
   const [openMenu, setOpenMenu] = useState(false);
   const [selectedOption, setSelectedOption] = useState('popular');
   const arrow = openMenu ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />;
-
+  const [choiseButton] = useState('all');
   const options = {
     popular: {
       title: 'популярности',
@@ -40,6 +46,7 @@ export default function Navbar({
   };
 
   const choiceOptions = {
+    all: { title: 'Все' },
     mega: { title: 'Сытные' },
     meat: { title: 'Мясные' },
     spicy: { title: 'Острые' },
@@ -48,6 +55,11 @@ export default function Navbar({
 
   const handleChoiseChange = (choiseOption: string) => {
     setScrollToCategory(choiseOption);
+    setCatName(choiceOptions[choiseOption].title);
+  };
+
+  const toggleSortOrder = () => {
+    setIsAscending(!isAscending);
   };
 
   return (
@@ -57,6 +69,7 @@ export default function Navbar({
           <Choise
             choiseOptions={choiceOptions}
             onChoiseChange={handleChoiseChange}
+            choiseButton={choiseButton}
           />
         </div>
         <div className="sort-settings">
@@ -80,6 +93,7 @@ export default function Navbar({
               selectedOption={selectedOption}
               options={options}
               onOptionChange={handleOptionChange}
+              toggleSortOrder={toggleSortOrder}
             />
           )}
         </div>
