@@ -30,7 +30,7 @@ const CardSection: React.FC<CardSectionProps> = ({
   return (
     <>
       <h2 className="type-title">{title}</h2>
-      <article className="type-section">
+      <div className="type-section">
         {cards.map((card) => (
           <Card
             key={card.id}
@@ -51,7 +51,7 @@ const CardSection: React.FC<CardSectionProps> = ({
             />
           </Card>
         ))}
-      </article>
+      </div>
     </>
   );
 };

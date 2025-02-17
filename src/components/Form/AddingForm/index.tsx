@@ -22,10 +22,15 @@ export default function AddProduct({ handleClick }: AddingProps) {
   return (
     <div className="change-container">
       <span className="change-title">Добавление</span>
-      <div className="change-body">
+      <form
+        className="change-body"
+        action={() =>
+          handleClick(image, title, description, Number(price), category)
+        }
+      >
         <Input
           title="Изображение"
-          type="text"
+          type="file"
           value={image}
           handler={(e) => setImage(e.target.value)}
           text="Ссылка на изображение"
@@ -58,7 +63,7 @@ export default function AddProduct({ handleClick }: AddingProps) {
           handler={(e) => setCategory(e.target.value)}
           text="spicy | veg | meat | mega"
         />
-      </div>
+      </form>
       <div className="change-footer">
         <Button
           className="choise"
@@ -66,6 +71,7 @@ export default function AddProduct({ handleClick }: AddingProps) {
             handleClick(image, title, description, Number(price), category)
           }
           text="Сохранить"
+          type="submit"
         />
       </div>
     </div>

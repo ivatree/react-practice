@@ -65,11 +65,7 @@ export default function Header({
           {user.id ? (
             <Button className="regBtn" onClick={LogOut} text={'Выйти'} />
           ) : (
-            <Button
-              className="regBtn"
-              onClick={openRegForm}
-              text={'Регистрация'}
-            />
+            <Button className="regBtn" onClick={openRegForm} text={'Войти'} />
           )}
         </div>
       </div>

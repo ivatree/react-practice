@@ -38,7 +38,19 @@ export default function CardChange({
   return (
     <div className="change-container">
       <span className="change-title">Редактирование</span>
-      <div className="change-body">
+      <form
+        className="change-body"
+        action={() =>
+          handleSave(
+            id,
+            newImage,
+            newTitle,
+            newDescription,
+            newPrice,
+            newCategory
+          )
+        }
+      >
         <Input
           title="Изображение"
           type="text"
@@ -74,7 +86,7 @@ export default function CardChange({
           handler={(e) => setNewCategory(e.target.value)}
           text="spicy | veg | meat | mega"
         />
-      </div>
+      </form>
       <div className="change-footer">
         <Button
           className="choise"
@@ -89,6 +101,7 @@ export default function CardChange({
             )
           }
           text="Сохранить"
+          type="submit"
         />
       </div>
     </div>

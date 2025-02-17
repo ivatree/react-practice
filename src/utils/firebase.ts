@@ -146,4 +146,6 @@ const addNewProduct = async (
     }
   }
 
+
+
 export {auth, db, saveBasket, clearBasket, getBasket, deleteItem, replaceGuestBasket, addNewProduct, deleteProductCard, updateProduct}
